@@ -28,6 +28,12 @@ class Fractal
 	public:
 		Fractal();
 		~Fractal();
+		int run( int argc, char *argv[] );
+
+
+/*******************************************************************************
+ *                 GLUT CALLBACK FUNCTIONS FROM THE CLASS
+*******************************************************************************/
 
 		/*!
 		 * @brief Drawing callback. Executes every glut display callaback. Also
