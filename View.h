@@ -9,7 +9,7 @@
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/
-#include "Drawable.h"
+#include "DrawingManager.h"
 
 /*******************************************************************************
  *                              CLASS INTERFACE
@@ -21,33 +21,33 @@
  * @details Provides functions and data for hiding and showing view and item
  * management.
  */
-class View : public Drawable
+class View : public DrawingManager
 {
-	private:
-		bool hidden;		/*!< Whether or not view is shown on screen */
+private:
+	bool hidden;		/*!< Whether or not view is shown on screen */
 
-	public:
-		View();
+public:
+	View();
 
-		/*!
-		 * @brief Allows this object to be drawn.
-		 */
-		void show();
+	/*!
+	 * @brief Allows this object to be drawn.
+	 */
+	void show();
 		
-		/*!
-		 * @brief Prevents this object from being drawn.
-		 */
-		void hide();
+	/*!
+	 * @brief Prevents this object from being drawn.
+	 */
+	void hide();
 		
-		/*!
-		 * @brief Checks if this object is being drawn.
-		 */
-		bool isHidden();
+	/*!
+	 * @brief Checks if this object is being drawn.
+	 */
+	bool isHidden();
 
-		/*!
-		 * @brief Function defining how the object is drawn.
-		 */
-		void draw();
+	/*!
+	 * @brief Function defining how the object is drawn.
+	 */
+	void draw();
 };
 
 #endif

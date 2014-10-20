@@ -46,5 +46,12 @@ bool View::isHidden()
 void View::draw()
 {
 	// Do nothing if object is hidden
-	if (hidden) return;
+	if (hidden)
+	{
+		return;
+	}
+	else
+	{
+		DrawingManager::draw();
+	}
 }
