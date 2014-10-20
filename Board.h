@@ -23,75 +23,75 @@ using namespace std;
 *******************************************************************************/
 class Board : public Drawable
 {
-	private:
-		int x;	/*!< Location of the center of the board on the x plane */
-		int y;	/*!< Location of the center of the board on the y plane */
-		int width;	/*!< Total width of the board */
-		int height;	/*!< Total height of the board */
-		int border;	/*!< The Thickness of the boarder */
-		unsigned char* left_text;	/*!< The left score */
-		unsigned char* right_text;	/*!< The right score */
-		unsigned char* center_text;	/*!< The end game text after a game */
+private:
+	int x;	/*!< Location of the center of the board on the x plane */
+	int y;	/*!< Location of the center of the board on the y plane */
+	int width;	/*!< Total width of the board */
+	int height;	/*!< Total height of the board */
+	int border;	/*!< The Thickness of the boarder */
+	unsigned char* left_text;	/*!< The left score */
+	unsigned char* right_text;	/*!< The right score */
+	unsigned char* center_text;	/*!< The end game text after a game */
 
-	public:
+public:
 
-		/*! 
-		 *  @brief Creates an instance of the board
-		 */
-		Board(int x, int y, int width, int height, int border);
+	/*! 
+	*  @brief Creates an instance of the board
+	*/
+	Board(int x, int y, int width, int height, int border);
 
-		/*! 
-		 *  @brief deletes the allocated memory for the scores and end game
-		 *		text
-		 */
-		~Board();
+	/*! 
+	*  @brief deletes the allocated memory for the scores and end game
+	*		text
+	*/
+	~Board();
 
-		/*! 
-		 *  @brief Creates and sets an unsighned charactor array for the left
-				score
-		 */
-		void setLeftText(string text);
+	/*! 
+	*  @brief Creates and sets an unsighned charactor array for the left
+		score
+	*/
+	void setLeftText(string text);
 
-		/*! 
-		 *  @brief Creates and sets an unsighned charactor array for the right
-				score
-		 */
-		void setRightText(string text);
+	/*! 
+	*  @brief Creates and sets an unsighned charactor array for the right
+		score
+	*/
+	void setRightText(string text);
 
-		/*! 
-		 *  @brief Creates and sets an unsighned charactor array for the end
-				game winner's text
-		 */
-		void setCenterText( string text );
-
-
-
-		/*! 
-		 *  @brief returns x demention of the center of the board
-		 */
-		int getX();
-
-		/*! 
-		 *  @brief returns y demention of the center of the board
-		 */
-		int getY();
-
-		/*! 
-		 *  @brief returns width of board
-		 */
-		int getWidth();
-
-		/*! 
-		 *  @brief returns height of board
-		 */
-		int getHeight();
+	/*! 
+	*  @brief Creates and sets an unsighned charactor array for the end
+		game winner's text
+	*/
+	void setCenterText( string text );
 
 
 
-		/*! 
-		 *  @brief draws the board in conjunction with the drawable class
-		 */
-		void draw();
+	/*! 
+	*  @brief returns x demention of the center of the board
+	*/
+	int getX();
+
+	/*! 
+	*  @brief returns y demention of the center of the board
+	*/
+	int getY();
+
+	/*! 
+	*  @brief returns width of board
+	*/
+	int getWidth();
+
+	/*! 
+	*  @brief returns height of board
+	*/
+	int getHeight();
+
+
+
+	/*! 
+	*  @brief draws the board in conjunction with the drawable class
+	*/
+	void draw();
 
 
 };

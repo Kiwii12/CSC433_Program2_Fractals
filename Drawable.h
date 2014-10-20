@@ -23,11 +23,11 @@
  */
 class Drawable
 {
-	public:
-		/*!
-		 * @brief Function defining how the object is drawn.
-		 */
-		virtual void draw() = 0;
+public:
+	/*!
+	* @brief Function defining how the object is drawn.
+	*/
+	virtual void draw() = 0;
 };
 
 #endif

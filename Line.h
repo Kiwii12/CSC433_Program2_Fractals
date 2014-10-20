@@ -16,21 +16,23 @@ class Line;
 
 class Line
 {
-	public:
-		Line();
-		~Line();
+public:
+	Line();
+	~Line();
 
-		void setRows( int Rows );
-		void setCols( int Cols );
+	void setRows( int Rows );
+	void setCols( int Cols );
 
 
-		double** d2array( );
-		void d2array_delete( double **&this_array);
-		void addLine( double x1, double y1, double x2, double y2 );
+	double** d2array( );
+	void d2array_delete( double **&this_array);
+	void addLine( double x1, double y1, double x2, double y2 );
 
-	private:
-		int number_of_lines;
-		int Rows;
-		int Cols;
+private:
+	int number_of_lines;
+	int Rows;
+	int Cols;
 
 };
+
+#endif
