@@ -18,7 +18,7 @@ class Fractals;
 #include <list>
 #include <GL/freeglut.h>
 #include <time.h>
-#include "Drawable.h"
+#include "DrawingManager.h"
 
 using namespace std;
 
@@ -32,7 +32,7 @@ using namespace std;
  *		It handles drawing functions, forwards OpenGL events, generates a
  *		framerate, and standardizes various aspects of the program.
 *******************************************************************************/
-class Fractals
+class Fractals : public DrawingManager
 {
 private:
 	static Fractals* instance;	/*!< reference to main instance */
@@ -44,7 +44,6 @@ private:
 	int window_height;			/*!< Height of gui window */
 	double scale;				/*!< Scale of the gui contents */
 	string window_name;			/*!< Name of the gui window */
-	map<int, list<Drawable*>> drawables;	/*!< list of objects to draw*/
 
 public:
 	Fractals();
@@ -56,37 +55,6 @@ public:
 	* @brief Function to get the current instance of the program.
 	*/
 	static Fractals* getInstance( );
-
-	/*!
-	* @brief Registers a Drawable object to be drawn on demand.
-	*/
-	void drawObject(Drawable* obj, int layer = 0);
-		
-	/*!
-	* @brief Checks whether an object is currently being drawn.
-	*/
-	bool isDrawingObject(Drawable* obj);
-
-	/*!
-	* @brief Determines the layer given the object is drawn at.
-	*/
-	int getDrawingLayer(Drawable* obj);
-
-	/*!
-	* @brief Sets the drawing layer of an already registered object.
-	*/
-	void setDrawingLayer(Drawable* obj, int layer);
-
-	/*!
-	* @brief Removes an object from the drawing list and no longer draws
-	*		it. Must be done before the object becomes deallocated.
-	*/
-	void stopDrawingObject(Drawable* obj);
-
-	/*!
-	* @brief Stops drawing all objects, clearing the drawing list.
-	*/
-	void stopDrawingAll();
 
 	/*!
 	* @brief Gets the width of the view port in the virtual space.

@@ -26,7 +26,7 @@ using namespace std;
 *******************************************************************************/
 class DrawingManager : public Drawable
 {
-private:
+protected:
 	map<int, list<Drawable*>> drawables;	/*!< list of objects to draw*/
 
 public:
