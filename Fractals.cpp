@@ -7,12 +7,14 @@
 *******************************************************************************/
 #include "Fractals.h"
 
+Fractals* Fractals::instance = NULL;
+
 /*******************************************************************************
  *                          FUNCTION DEFINITIONS
 *******************************************************************************/
-Fractal::Fractal()
+Fractals::Fractals()
 {
-
+	instance = this;
 }
 
 Fractals::~Fractals()
@@ -161,7 +163,7 @@ void Fractals::reshape(int w, int h)
 			0,
 			view_height );
 		
-		view_x = (w / scale - view_width) / 2;
+		view_x = (int) (w / scale - view_width) / 2;
 		view_y = 0;
 	}
 	else
@@ -174,7 +176,7 @@ void Fractals::reshape(int w, int h)
 			view_height + ((h / scale) - view_height) / 2 );
 
 		view_x = 0;
-		view_y = (h / scale - view_height) / 2;
+		view_y = (int) (h / scale - view_height) / 2;
 	}
     glViewport( 0, 0, w, h );			// Adjust viewport to new window
 
@@ -270,8 +272,8 @@ void Fractals::mouseclick(int button, int state, int x, int y)
     y = window_height - y;
 
 	// Correct for scaling
-	x /= scale;
-	y /= scale;
+	x = (int) (x / scale);
+	y = (int) (y / scale);
 
 	x -= view_x;
 	y -= view_y;

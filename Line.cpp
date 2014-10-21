@@ -18,7 +18,7 @@ double** Line::d2array ()
 	double **this_array = nullptr;
 
 	//allocates memory
-	this_array = new (nothrow) double * [Rows];
+	this_array = new (std::nothrow) double * [Rows];
 
 	//checks if memory was allocated
 	if (this_array == nullptr)
@@ -27,7 +27,7 @@ double** Line::d2array ()
 	//loops through and allocated the second part
 	for (i=0; i < Rows; i++)
 	{
-		this_array[i] = new (nothrow) double [Cols];
+		this_array[i] = new (std::nothrow) double [Cols];
 
 		//delets all allocated memory if an error occured
 		if (this_array[i] == nullptr)
@@ -43,7 +43,7 @@ double** Line::d2array ()
 	}
 	if (this_array == nullptr)
 	{
-		cout << "memory or allocation error";
+		std::cout << "memory or allocation error";
 		exit(0);
 	}
 	return this_array;

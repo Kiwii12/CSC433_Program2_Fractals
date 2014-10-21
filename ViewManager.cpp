@@ -2,22 +2,45 @@
 
 bool ViewManager::registerView(string name, View* view)
 {
-	// TODO
+	if (view == NULL) return false;
+	View* v = getRegisteredView(name);
+	if (v == NULL)
+	{
+		views[name] = view;
+		return true;
+	}
+	return false;
 }
 
 bool ViewManager::unregisterView(string name)
 {
-	// TODO
+	View* view = getRegisteredView(name);
+	if (view != NULL)
+	{
+		view -> hide();
+		views.erase(name);
+		if (active_view == view)
+		{
+			active_view = NULL;
+		}
+		return true;
+	}
+	return false;
 }
 
 bool ViewManager::switchView(string name)
 {
 	if (getRegisteredView(name) != NULL)
 	{
-		getRegisteredView(current_view) -> hide();
-		active_view = name;
-		getRegisteredView(current_view) -> show();
+		if (active_view != NULL)
+		{
+			active_view -> hide();
+		}
+		active_view = getRegisteredView(name);
+		active_view -> show();
+		return true;
 	}
+	return false;
 }
 
 View* ViewManager::getRegisteredView(string name)
@@ -28,11 +51,12 @@ View* ViewManager::getRegisteredView(string name)
 	}
 	catch (int e)
 	{
+		e;
 		return NULL;
 	}
 }
 
 View* ViewManager::getActiveView()
 {
-	return getRegisteredView(active_view);
+	return active_view;
 }

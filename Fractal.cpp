@@ -1,7 +1,7 @@
 #include "Fractal.h"
 
 Fractal::Fractal()
-	: direction(true)
+	: initiator_direction(true)
 {
 	
 }
@@ -18,7 +18,7 @@ void Fractal::loadGenerator(const list<point> &generator)
 
 void Fractal::setInitiatorDirection(bool direction)
 {
-	this -> direction = direction;
+	this -> initiator_direction = direction;
 }
 
 void Fractal::generateFractal()

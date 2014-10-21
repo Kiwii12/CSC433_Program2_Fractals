@@ -15,6 +15,8 @@ class Fractal;
 #include<list>
 #include "Drawable.h"
 
+using namespace std;
+
 /***************************************************************************//**
  * @brief The Fractal class is responsible for generating a fractal using an
  *      initiator and a generator.
@@ -22,7 +24,7 @@ class Fractal;
  * @details This class takes in an initiator and a generator and builds a
  *      fractal.
 *******************************************************************************/
-class Fractal::public Drawable
+class Fractal : public Drawable
 {
 public:
 	/**
