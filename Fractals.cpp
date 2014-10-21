@@ -1,11 +1,11 @@
 /***************************************************************************//**
- * @file File containing the implementation of the Fractal class.
+ * @file File containing the implementation of the Fractals class.
 *******************************************************************************/
 
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/
-#include "Fractal.h"
+#include "Fractals.h"
 
 /*******************************************************************************
  *                          FUNCTION DEFINITIONS
@@ -15,7 +15,7 @@ Fractal::Fractal()
 
 }
 
-Fractal::~Fractal()
+Fractals::~Fractals()
 {
 
 }
@@ -30,7 +30,7 @@ Fractal::~Fractal()
  *
  * @returns Status code of the program. 0 means no problems.
 *******************************************************************************/
-int Fractal::run( int argc, char *argv[] )
+int Fractals::run( int argc, char *argv[] )
 {
 	srand((unsigned int) time(NULL));
 
@@ -85,7 +85,7 @@ int Fractal::run( int argc, char *argv[] )
  *
  * @returns Pointer to the current instance of the program.
 *******************************************************************************/
-Fractal* Fractal::getInstance()
+Fractals* Fractals::getInstance()
 {
 	return instance;
 }
@@ -102,7 +102,7 @@ Fractal* Fractal::getInstance()
  *				Objects at the same layer are drawn in an undefined
  *				order.
 *******************************************************************************/
-void Fractal::drawObject(Drawable* obj, int layer)
+void Fractals::drawObject(Drawable* obj, int layer)
 {
 	if (!isDrawingObject(obj))
 	{
@@ -119,7 +119,7 @@ void Fractal::drawObject(Drawable* obj, int layer)
  *
  * @returns True if the object is being drawn, false if not.
 *******************************************************************************/
-bool Fractal::isDrawingObject(Drawable* obj)
+bool Fractals::isDrawingObject(Drawable* obj)
 {
 	// Loop through every later and every object in that row until we find obj
 	typedef map<int, list<Drawable*>>::iterator it_type;
@@ -148,7 +148,7 @@ bool Fractal::isDrawingObject(Drawable* obj)
  * @returns The layer at which the object is being drawn. If object is
  *		not being drawn, will return 0.
 *******************************************************************************/
-int Fractal::getDrawingLayer(Drawable* obj)
+int Fractals::getDrawingLayer(Drawable* obj)
 {
 	// Loop through every later and every object in that row until we find obj
 	typedef map<int, list<Drawable*>>::iterator it_type;
@@ -175,7 +175,7 @@ int Fractal::getDrawingLayer(Drawable* obj)
  *
  * @param[in]	obj - Pointer to the object to no longer draw.
 *******************************************************************************/
-void Fractal::stopDrawingObject(Drawable* obj)
+void Fractals::stopDrawingObject(Drawable* obj)
 {
 	// For every later, remove reference to object. Don't bother searching.
 	typedef map<int, list<Drawable*>>::iterator it_type;
@@ -192,7 +192,7 @@ void Fractal::stopDrawingObject(Drawable* obj)
  * 
  * @par Description: Stops drawing all objects, clearing the drawing list.
 *******************************************************************************/
-void Fractal::stopDrawingAll()
+void Fractals::stopDrawingAll()
 {
 	drawables.clear();
 }
@@ -204,7 +204,7 @@ void Fractal::stopDrawingAll()
  * 
  * @returns The width of the view port in pixels.
 *******************************************************************************/
-int Fractal::getViewWidth()
+int Fractals::getViewWidth()
 {
 	return view_width;
 }
@@ -216,7 +216,7 @@ int Fractal::getViewWidth()
  *
  * @returns The height of the view port in pixels.
 *******************************************************************************/
-int Fractal::getViewHeight()
+int Fractals::getViewHeight()
 {
 	return view_height;
 }
@@ -227,7 +227,7 @@ int Fractal::getViewHeight()
  * @par Description: Drawing callback. Executes every glut display callaback.
  *		Also calls the draw function of all registerd Drawable objects.
 *******************************************************************************/
-void Fractal::display()
+void Fractals::display()
 {
 	//clear the display and set backround to black
 	glClear( GL_COLOR_BUFFER_BIT );
@@ -258,7 +258,7 @@ void Fractal::display()
  * @param[in]	w - The window's new width in pixels.
  * @param[in]	h - The window's new height in pixels.
 *******************************************************************************/
-void Fractal::reshape(int w, int h)
+void Fractals::reshape(int w, int h)
 {
 	// store new window dimensions globally
     window_width = w;
@@ -312,7 +312,7 @@ void Fractal::reshape(int w, int h)
  * @param[in]	y - The y coordinate of the mouse at the time the key
  *				was pressed.
 *******************************************************************************/
-void Fractal::keyDown(unsigned char key, int x, int y)
+void Fractals::keyDown(unsigned char key, int x, int y)
 {
     // TODO
 }
@@ -329,7 +329,7 @@ void Fractal::keyDown(unsigned char key, int x, int y)
  * @param[in]	y - The y coordinate of the mouse at the time the key
  *				was pressed.
 *******************************************************************************/
-void Fractal::keyUp(unsigned char key, int x, int y)
+void Fractals::keyUp(unsigned char key, int x, int y)
 {
 	// TODO
 }
@@ -346,7 +346,7 @@ void Fractal::keyUp(unsigned char key, int x, int y)
  * @param[in]	y - The y coordinate of the mouse at the time the key
  *				was pressed.
 *******************************************************************************/
-void Fractal::keySpecialDown(int key, int x, int y)
+void Fractals::keySpecialDown(int key, int x, int y)
 {
 	// TODO
 }
@@ -363,7 +363,7 @@ void Fractal::keySpecialDown(int key, int x, int y)
  * @param[in]	y - The y coordinate of the mouse at the time the key
  *				was pressed.
 *******************************************************************************/
-void Fractal::keySpecialUp(int key, int x, int y)
+void Fractals::keySpecialUp(int key, int x, int y)
 {
 	// TODO
 }
@@ -381,7 +381,7 @@ void Fractal::keySpecialUp(int key, int x, int y)
  * @param[in]	y - The y coordinate of the mouse at the time the button
  *				was pressed.
 *******************************************************************************/
-void Fractal::mouseclick(int button, int state, int x, int y)
+void Fractals::mouseclick(int button, int state, int x, int y)
 {
 	// Correct for coordinate system
     y = window_height - y;
@@ -403,7 +403,7 @@ void Fractal::mouseclick(int button, int state, int x, int y)
  *		function of other classes necessary for the game. Necessary
  *		for game elemnts that are not dependent on user interaction.
 *******************************************************************************/
-void Fractal::step()
+void Fractals::step()
 {
 	// TODO
 }
@@ -420,7 +420,7 @@ void Fractal::step()
 *******************************************************************************/
 void display()
 {
-	Fractal::getInstance()->display();
+	Fractals::getInstance()->display();
 }
 
 /***************************************************************************//**
@@ -434,7 +434,7 @@ void display()
 *******************************************************************************/
 void reshape(int w, int h)
 {
-	Fractal::getInstance()->reshape(w, h);
+	Fractals::getInstance()->reshape(w, h);
 }
 
 /***************************************************************************//**
@@ -451,7 +451,7 @@ void reshape(int w, int h)
 *******************************************************************************/
 void keyDown(unsigned char key, int x, int y)
 {
-	Fractal::getInstance()->keyDown(key, x, y);
+	Fractals::getInstance()->keyDown(key, x, y);
 }
 
 /***************************************************************************//**
@@ -468,7 +468,7 @@ void keyDown(unsigned char key, int x, int y)
 *******************************************************************************/
 void keyUp(unsigned char key, int x, int y)
 {
-	Fractal::getInstance()->keyUp(key, x, y);
+	Fractals::getInstance()->keyUp(key, x, y);
 }
 
 /***************************************************************************//**
@@ -486,7 +486,7 @@ void keyUp(unsigned char key, int x, int y)
 *******************************************************************************/
 void keySpecialDown(int key, int x, int y)
 {
-	Fractal::getInstance()->keySpecialDown(key, x, y);
+	Fractals::getInstance()->keySpecialDown(key, x, y);
 }
 
 /***************************************************************************//**
@@ -504,7 +504,7 @@ void keySpecialDown(int key, int x, int y)
 *******************************************************************************/
 void keySpecialUp(int key, int x, int y)
 {
-	Fractal::getInstance()->keySpecialUp(key, x, y);
+	Fractals::getInstance()->keySpecialUp(key, x, y);
 }
 
 /***************************************************************************//**
@@ -523,7 +523,7 @@ void keySpecialUp(int key, int x, int y)
 *******************************************************************************/
 void mouseclick(int button, int state, int x, int y)
 {
-	Fractal::getInstance()->mouseclick(button, state, x, y);
+	Fractals::getInstance()->mouseclick(button, state, x, y);
 }
 
 /***************************************************************************//**
@@ -545,7 +545,7 @@ void step(int i)
 	glutTimerFunc(fps_delay, *::step, 0);
 	
 	// Call step function
-	Fractal::getInstance()->step();
+	Fractals::getInstance()->step();
 
 	// Redraw the screen after frame's been processed.
 	glutPostRedisplay();

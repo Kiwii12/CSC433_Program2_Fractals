@@ -1,16 +1,16 @@
 /***************************************************************************//**
- * @file File containing the declaration for the Fractal class.
+ * @file File containing the declaration for the Fractals class.
  *
- * @brief Contains the declaration for the Fractal class, the core class of the
+ * @brief Contains the declaration for the Fractals class, the core class of the
  *		entire program.
 *******************************************************************************/
-#ifndef _FRACTAL_H_ //makes sure class is not declared twice
-#define _FRACTAL_H_
+#ifndef _FRACTALS_H_ //makes sure class is not declared twice
+#define _FRACTALS_H_
 
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/
-class Fractal;
+class Fractals;
 
 #include <iostream>
 #include <string>
@@ -23,7 +23,7 @@ class Fractal;
 using namespace std;
 
 /***************************************************************************//**
- * @brief The Fractal class is in charge of window management, drawing
+ * @brief The Fractals class is in charge of window management, drawing
  *		all the parts of the screen, and running the other classes. It also
  *		handles the interaction between glut and the program and event
  *		management.
@@ -32,10 +32,10 @@ using namespace std;
  *		It handles drawing functions, forwards OpenGL events, generates a
  *		framerate, and standardizes various aspects of the program.
 *******************************************************************************/
-class Fractal
+class Fractals
 {
 private:
-	static Fractal* instance;	/*!< reference to main instance */
+	static Fractals* instance;	/*!< reference to main instance */
 	int view_x;					/*!< The x offset of the drawing region */
 	int view_y;					/*!< The y offset of the drawing region */
 	int view_width;				/*!< The width of the drawable region */
@@ -47,15 +47,15 @@ private:
 	map<int, list<Drawable*>> drawables;	/*!< list of objects to draw*/
 
 public:
-	Fractal();
-	~Fractal();
+	Fractals();
+	~Fractals();
 	int run( int argc, char *argv[] );
 
 
 	/*!
 	* @brief Function to get the current instance of the program.
 	*/
-	static Fractal* getInstance( );
+	static Fractals* getInstance( );
 
 	/*!
 	* @brief Registers a Drawable object to be drawn on demand.

@@ -60,7 +60,7 @@
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/
-#include "Fractal.h"
+#include "Fractals.h"
 
 /**************************************************************************//**
  * @author Johnny Ackerman
@@ -78,8 +78,8 @@
 int main( int argc, char *argv[] )
 {
 	// Initialize program's core class
-	Fractal fractal;
+	Fractals fractals;
 
 	// Run everything through the Pong class
-	return fractal.run( argc, argv);
+	return fractals.run( argc, argv);
 }
