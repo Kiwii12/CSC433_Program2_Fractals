@@ -23,25 +23,25 @@ void Fractal::setInitiatorDirection(bool direction)
 
 void Fractal::generateFractal()
 {
-	
+	// TODO Code to generate fractal
 }
 
 void Fractal::clearInitiator()
 {
-	
+	initiator.clear();
 }
 
 void Fractal::clearGenerator()
 {
-	
+	generator.clear();
 }
 
 void Fractal::clearFractal()
 {
-	
+	fractal.clear();
 }
 
 void Fractal::draw()
 {
-	
+	// TODO Code to draw fractal
 }
