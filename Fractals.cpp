@@ -15,6 +15,10 @@ Fractals* Fractals::instance = NULL;
 Fractals::Fractals()
 {
 	instance = this;
+	
+	registerView(&fractalView);
+	registerView(&initiatorView);
+	registerView(&generatorView);
 }
 
 Fractals::~Fractals()
@@ -282,15 +286,31 @@ void Fractals::mouseclick(int button, int state, int x, int y)
 }
 
 /***************************************************************************//**
- * @author Daniel Andrus
+ * @author Daniel Andrus, Johnny Ackerman
  * 
- * @par Description: Step callback. Called every frame of the game. Calls step
- *		function of other classes necessary for the game. Necessary
- *		for game elemnts that are not dependent on user interaction.
+ * @par Description: Mouse movement callback. Executes when the mouse is moved
+ *		inside the program window.
+ *
+ * @param[in]	x - New x position of the mouse.
+ * @param[in]	y - New y position of the mouse.
 *******************************************************************************/
-void Fractals::step()
+void Fractals::mousemove(int x, int y)
 {
-	// TODO
+	
+}
+
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description: Mouse movement callback. Executes when the mouse is moved
+ *		inside the program window while a button is pressed.
+ *
+ * @param[in]	x - New x position of the mouse.
+ * @param[in]	y - New y position of the mouse.
+*******************************************************************************/
+void Fractals::mousedrag(int x, int y)
+{
+	
 }
 
 /*******************************************************************************
@@ -300,8 +320,7 @@ void Fractals::step()
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description: Drawing callback. Executes every glut display callaback.
- *		Also calls the draw function of all registerd Drawable objects. Simply
- *		forwards to Pong class' identical function.
+ *		Also calls the draw function of all registerd Drawable objects.
 *******************************************************************************/
 void display()
 {
@@ -312,7 +331,6 @@ void display()
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description: Resize callback. Executes whenever the window is resized.
- *		Simply forwards to Pong class' identical function.
  *
  * @param[in]	w - The window's new width in pixels.
  * @param[in]	h - The window's new height in pixels.
@@ -326,7 +344,7 @@ void reshape(int w, int h)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description: Key down callback. Executes whenever a typical key is
- *		pressed. Simply forwards to Pong class' identical function.
+ *		pressed.
  *
  * @param[in]	key - ASCII-encoded char of the key that was pressed.
  * @param[in]	x - The x coordinate of the mouse at the time the key
@@ -343,7 +361,7 @@ void keyDown(unsigned char key, int x, int y)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description: Key up callback. Executes whenever a typical key is
- *		released. Simply forwards to Pong class' identical function.
+ *		released.
  * 
  * @param[in]	key - ASCII-encoded char of the key that was pressed.
  * @param[in]	x - The x coordinate of the mouse at the time the key
@@ -360,8 +378,7 @@ void keyUp(unsigned char key, int x, int y)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description: Special key down callback. Executes whenever a "special"
- *		key such as an arrow key is pressed. Simply forwards to Pong class'
- *		identical function.
+ *		key such as an arrow key is pressed.
  *  
  * @param[in]	key - Special GLUT enumerator of the key.
  * @param[in]	x - The x coordinate of the mouse at the time the key
@@ -378,8 +395,7 @@ void keySpecialDown(int key, int x, int y)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description: Special key up callback. Executes whenever a "special" key
- * 		such as an arrow key is released. Simply forwards to Pong class'
- *		identical function.
+ * 		such as an arrow key is released.
  *  
  * @param[in]	key - Special GLUT enumerator of the key.
  * @param[in]	x - The x coordinate of the mouse at the time the key
@@ -396,8 +412,7 @@ void keySpecialUp(int key, int x, int y)
  * @author Johnny Ackerman
  * 
  * @par Description: Mouse click callback. Executes whenever a mouse button is
- * 		either clicked or released. Simply forwards to Pong class'
- * 		identical function.
+ * 		either clicked or released.
  *  
  * @param[in]	button - The button whose state was changed.
  * @param[in]	state - The new state of the button.
@@ -412,27 +427,29 @@ void mouseclick(int button, int state, int x, int y)
 }
 
 /***************************************************************************//**
- * @author Daniel Andrus
+ * @author Daniel Andrus, Johnny Ackerman
  * 
- * @par Description: Step callback. Called every frame of the game. Calls step
- *		function of other classes necessary for the game. Necessary
- *		for game elemnts that are not dependent on user interaction.
- *		Simply to Pong class' step() function.
+ * @par Description: Mouse movement callback. Executes when the mouse is moved
+ *		inside the program window.
  *
- * @param[in]	i - Necessary for GLUT. Unused.
+ * @param[in]	x - New x position of the mouse.
+ * @param[in]	y - New y position of the mouse.
 *******************************************************************************/
-void step(int i)
+void mousemove(int x, int y)
 {
-	// FPS, or technically "milliseconds per frame"
-	static unsigned int fps_delay = 1000 / 60;
-	
-	// Reset the timer
-	glutTimerFunc(fps_delay, *::step, 0);
-	
-	// Call step function
-	Fractals::getInstance()->step();
-
-	// Redraw the screen after frame's been processed.
-	glutPostRedisplay();
+	Fractals::getInstance()->mousemove(x, y);
 }
 
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description: Mouse movement callback. Executes when the mouse is moved
+ *		inside the program window while a button is pressed.
+ *
+ * @param[in]	x - New x position of the mouse.
+ * @param[in]	y - New y position of the mouse.
+*******************************************************************************/
+void mousedrag(int x, int y)
+{
+	Fractals::getInstance()->mousedrag(x, y);
+}

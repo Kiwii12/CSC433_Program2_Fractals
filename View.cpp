@@ -16,7 +16,8 @@
  * 
  * @par Description: Constructor. Intitializes variables.
  *****************************************************************************/
-View::View() : hidden(false)
+View::View(double x, double y, double w, double h)
+	: hidden(true), x(x), y(y), width(w), height(h)
 {
 
 }

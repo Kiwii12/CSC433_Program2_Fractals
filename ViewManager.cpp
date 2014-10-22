@@ -14,6 +14,30 @@
 /**************************************************************************//**
  * @author Daniel Andrus
  * 
+ * @par Description: Constructor for the class. Initializes variables.
+ *****************************************************************************/
+ViewManager::ViewManager()
+	: active_view(NULL)
+{
+	
+}
+
+/**************************************************************************//**
+ * @author Daniel Andrus
+ * 
+ * @par Description: Destructor for the class. Cleans up unfinished business.
+ *****************************************************************************/
+ViewManager::~ViewManager()
+{
+	if (active_view != NULL)
+	{
+		active_view -> hide();
+	}
+}
+
+/**************************************************************************//**
+ * @author Daniel Andrus
+ * 
  * @par Description: Registers a view under the given name. If a view under the
  *      given name already exists, will fail and return false.
  *

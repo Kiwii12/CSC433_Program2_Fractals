@@ -29,11 +29,20 @@ using namespace std;
  */
 class ViewManager : Drawable
 {
-private:
+protected:
 	map<string, View*> views;	/*!< Map of registered views */
 	View* active_view;			/*!< Pointer to currently active view */
 	
 public:
+	/*!
+	 * @brief Class constructor
+	 */
+	ViewManager();
+	
+	/*!
+	 * @brief Class destructor
+	 */
+	~ViewManager();
 	
 	/*!
 	 * @brief Registers a view

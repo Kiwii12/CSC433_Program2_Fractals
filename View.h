@@ -27,7 +27,12 @@ private:
 	bool hidden;		/*!< Whether or not view is shown on screen */
 
 public:
-	View();
+	double x;
+	double y;
+	double width;
+	double height;
+	
+	View(double x = 0, double y = 0, double w = 0, double h = 0);
 
 	/*!
 	 * @brief Allows this object to be drawn.
@@ -48,6 +53,24 @@ public:
 	 * @brief Function defining how the object is drawn.
 	 */
 	void draw();
+	
+	/*!
+	 * @brief Sends the view a click event.
+	 */
+	virtual void mouseclick( int button, int state, int x, int y ) = 0;
+	
+	/*!
+	 * @brief Mouse movement callback. Executes whenever a mouse is moved
+	 *		inside the program window.
+	 */
+	virtual void mousemove(int x, int y) = 0;
+
+	/*!
+	 * @brief Mouse drag callback. Executes whenever a mouse is moved inside
+	 *		the program window while a button is pressed.
+	 */
+	virtual void mousedrag(int x, int y) = 0;
+	
 };
 
 #endif
