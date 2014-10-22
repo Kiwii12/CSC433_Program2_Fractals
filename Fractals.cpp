@@ -16,9 +16,9 @@ Fractals::Fractals()
 {
 	instance = this;
 	
-	registerView(&fractalView);
-	registerView(&initiatorView);
-	registerView(&generatorView);
+	registerView("Fractal", &fractalView);
+	registerView("Initiator", &initiatorView);
+	registerView("Generator", &generatorView);
 }
 
 Fractals::~Fractals()
@@ -75,7 +75,6 @@ int Fractals::run( int argc, char *argv[] )
 	glutSpecialFunc( *::keySpecialDown );
 	glutSpecialUpFunc( *::keySpecialUp );
     glutMouseFunc( *::mouseclick );
-	glutTimerFunc(0, *::step, 0);
 
     // Go into OpenGL/GLUT main loop
     glutMainLoop();
@@ -132,7 +131,7 @@ void Fractals::display()
 	glClear( GL_COLOR_BUFFER_BIT );
 	glColor3f( 1.0, 1.0, 1.0 );
     
-	draw();
+	DrawingManager::draw();
 
 	// Flush graphical output
     glutSwapBuffers();
