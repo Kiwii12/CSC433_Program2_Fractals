@@ -20,6 +20,11 @@ class Fractals;
 #include <time.h>
 #include "DrawingManager.h"
 
+#include "ViewManager.h"
+#include "InitiatorView.h"
+#include "GeneratorView.h"
+#include "FractalView.h"
+
 using namespace std;
 
 /***************************************************************************//**
