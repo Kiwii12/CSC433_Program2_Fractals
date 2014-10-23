@@ -1,7 +1,7 @@
 #include "FractalView.h"
 
 FractalView::FractalView(double x, double y, double w, double h)
-	: x(x), y(y), width(w), height(h)
+	: View(x, y, w, h)
 {
 	
 }

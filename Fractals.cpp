@@ -13,6 +13,12 @@ Fractals* Fractals::instance = NULL;
  *                          FUNCTION DEFINITIONS
 *******************************************************************************/
 Fractals::Fractals()
+	: view_x(0), view_y(0), view_width(735), view_height(480),
+	window_width(view_width), window_height(view_height), scale(1),
+	window_name("Fractals"),
+	initiatorView(view_x, view_y, view_width, view_height),
+	generatorView(view_x, view_y, view_width, view_height),
+	fractalView(view_x, view_y, view_width, view_height),
 {
 	instance = this;
 	
@@ -48,8 +54,8 @@ int Fractals::run( int argc, char *argv[] )
 	int h = glutGet(GLUT_SCREEN_HEIGHT);
 	if (w != 0 && h != 0)
 	{
-		w = w / 2 - view_width / 2;
-		h = h / 2 - view_height / 2;
+		w = w / 2 - window_width / 2;
+		h = h / 2 - window_height / 2;
 	}
 
 	// Initialize glut with 32-bit graphics, double buffering, and anti-aliasing
@@ -58,7 +64,7 @@ int Fractals::run( int argc, char *argv[] )
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Set up the program window
-    glutInitWindowSize( view_width, view_height);    // initial window size
+    glutInitWindowSize( window_width, window_height);    // initial window size
     glutInitWindowPosition( w, h );                  // initial window position
     glutCreateWindow( window_name.c_str() );         // window title
 
