@@ -3,15 +3,17 @@
 InitiatorView::InitiatorView(double x, double y, double w, double h)
 	: View(x, y, w, h)
 {
-	
+	double startx = 0;
+	double starty = 0;
+	double endx = 0;
+	double endy = 0;
+	int lastButton;
 }
 
 void InitiatorView::mouseclick(int button, int state, double x, double y)
 {
-	int startx = 0;
-	int starty = 0;
-	int endx = 0;
-	int endy = 0;
+	Fractal::point p;
+	glColor3d( 1.0, 1.0, 1.0 ); //makes sure color is white  before draw
 	switch ( button )
     {
         case 0:				// left button: create objects
@@ -21,13 +23,19 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
                 startx = endx = x;
                 starty = endy = height - y;
 
+				p.x = startx;
+				p.y = starty;
+				p.angle = 0;
+				p.distance = 0;
+				initiator.push_back(p);
+
                 // start XORing (rubberbanding)
                 glLogicOp( GL_XOR );
 
                 // draw first Line (actually unnecessary)
                	glBegin( GL_LINES );
-					glVertex2i( startx, starty );
-					glVertex2i( endx, endy );
+					glVertex2d( startx, starty );
+					glVertex2d( endx, endy );
 				glEnd();
             }
 
@@ -35,13 +43,19 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
             {
                 // erase last rectangle (actually unnecessary)
                 glBegin( GL_LINES );
-					glVertex2i( startx, starty );
-					glVertex2i( endx, endy );
+					glVertex2d( startx, starty );
+					glVertex2d( endx, endy );
 				glEnd();
 
                 // store end coordinates
                 endx = x;
                 endy = height - y;
+
+				p.x = endx;
+				p.y = endy;
+				p.angle = 0;
+				p.distance = 0;
+				initiator.push_back(p);
 
                 // restore copy mode
                 glLogicOp( GL_COPY );
@@ -56,7 +70,7 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
             break;
     }
 
-    lastbutton = button;
+    lastButton = button;
 }
 
 void InitiatorView::mousemove(double x, double y)
@@ -66,7 +80,23 @@ void InitiatorView::mousemove(double x, double y)
 
 void InitiatorView::mousedrag(double x, double y)
 {
-	// TODO
+	glColor3d( 1.0, 1.0, 1.0 ); //makes sure color is white before draw
+	if ( lastButton == 0 ) //left Mouse Button
+    {
+        // erase previous rectangle
+        glBegin( GL_LINES );
+			glVertex2d( startx, starty );
+			glVertex2d( endx, endy );
+		glEnd();
+
+        // draw new (rubberbanded) rectangle
+        endx = x;
+        endy = height - y;
+        glBegin( GL_LINES );
+			glVertex2d( startx, starty );
+			glVertex2d( endx, endy );
+		glEnd();
+    }
 }
 
 void InitiatorView::draw()
