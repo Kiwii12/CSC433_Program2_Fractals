@@ -13,9 +13,9 @@ Fractals* Fractals::instance = NULL;
  *                          FUNCTION DEFINITIONS
 *******************************************************************************/
 Fractals::Fractals()
-	: window_width(view_width), window_height(view_height),
+	: view_x(0), view_y(0), view_width(735), view_height(480),
+	window_width((int) view_width), window_height((int) view_height),
 	window_name("Fractals"),
-	view_x(0), view_y(0), view_width(735), view_height(480),
 	initiatorView(view_x, view_y, view_width, view_height),
 	generatorView(view_x, view_y, view_width, view_height),
 	fractalView(view_x, view_y, view_width, view_height)
@@ -115,7 +115,7 @@ Fractals* Fractals::getInstance()
  * 
  * @returns The width of the view port in pixels.
 *******************************************************************************/
-int Fractals::getViewWidth()
+double Fractals::getViewWidth()
 {
 	return view_width;
 }
@@ -127,7 +127,7 @@ int Fractals::getViewWidth()
  *
  * @returns The height of the view port in pixels.
 *******************************************************************************/
-int Fractals::getViewHeight()
+double Fractals::getViewHeight()
 {
 	return view_height;
 }
@@ -289,17 +289,24 @@ void Fractals::keySpecialUp(int key, int x, int y)
 *******************************************************************************/
 void Fractals::mouseclick(int button, int state, int x, int y)
 {
+	double vx;	// view x
+	double vy;	// view y
+
 	// Correct for coordinate system
-    y = window_height - y;
+	vx = x;
+    vy = window_height - y;
 
 	// Correct for scaling
-	x *= (int) (view_width / window_width);
-	y *= (int) (view_height / window_height);
+	vx *= view_width / window_width;
+	vy *= view_height / window_height;
 
-	x -= view_x;
-	y -= view_y;
+	vx -= view_x;
+	vy -= view_y;
 
-    // TODO
+	if (getActiveView() != NULL)
+	{
+		getActiveView()->mouseclick(button, state, vx, vy);
+	}
 }
 
 /***************************************************************************//**
@@ -313,7 +320,24 @@ void Fractals::mouseclick(int button, int state, int x, int y)
 *******************************************************************************/
 void Fractals::mousemove(int x, int y)
 {
-	
+	double vx;	// view x
+	double vy;	// view y
+
+	// Correct for coordinate system
+	vx = x;
+    vy = window_height - y;
+
+	// Correct for scaling
+	vx *= view_width / window_width;
+	vy *= view_height / window_height;
+
+	vx -= view_x;
+	vy -= view_y;
+
+	if (getActiveView() != NULL)
+	{
+		getActiveView()->mousemove(vx, vy);
+	}
 }
 
 /***************************************************************************//**
@@ -327,7 +351,24 @@ void Fractals::mousemove(int x, int y)
 *******************************************************************************/
 void Fractals::mousedrag(int x, int y)
 {
-	
+	double vx;	// view x
+	double vy;	// view y
+
+	// Correct for coordinate system
+	vx = x;
+    vy = window_height - y;
+
+	// Correct for scaling
+	vx *= view_width / window_width;
+	vy *= view_height / window_height;
+
+	vx -= view_x;
+	vy -= view_y;
+
+	if (getActiveView() != NULL)
+	{
+		getActiveView()->mousedrag(vx, vy);
+	}
 }
 
 /*******************************************************************************

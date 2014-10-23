@@ -67,12 +67,12 @@ public:
 	/*!
 	* @brief Gets the width of the view port in the virtual space.
 	*/
-	int getViewWidth();
+	double getViewWidth();
 
 	/*!
 	* @brief Gets the height of the view port in the virtual space.
 	*/
-	int getViewHeight();
+	double getViewHeight();
 
 	/*!
 	* @brief Drawing callback. Executes every glut display callaback. Also
