@@ -46,6 +46,9 @@ int Fractals::run( int argc, char *argv[] )
 {
 	srand((unsigned int) time(NULL));
 
+	window_width = (int) view_width;
+	window_height = (int) view_height;
+
 	// perform various OpenGL initializations
     glutInit( &argc, argv );
 
