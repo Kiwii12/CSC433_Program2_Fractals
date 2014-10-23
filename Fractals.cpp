@@ -75,6 +75,11 @@ int Fractals::run( int argc, char *argv[] )
 	glutSpecialFunc( *::keySpecialDown );
 	glutSpecialUpFunc( *::keySpecialUp );
     glutMouseFunc( *::mouseclick );
+	glutMotionFunc( *::mousedrag );
+	glutPassiveMotionFunc( *::mousemove );
+
+	// allow XORing
+    glEnable( GL_COLOR_LOGIC_OP ); //used for rubberbanding
 
     // Go into OpenGL/GLUT main loop
     glutMainLoop();
