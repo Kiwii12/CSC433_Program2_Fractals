@@ -152,6 +152,9 @@ void Fractals::reshape(int w, int h)
 	// store new window dimensions globally
     window_width = w;
     window_height = h;
+
+	/* Ignore window resizes and just roll with it. Just stretch the content.
+	 * Laziness to the max.
 	double ratio = (double) view_width / (double) view_height;
 	double scale;
 
@@ -182,6 +185,7 @@ void Fractals::reshape(int w, int h)
 		view_x = 0;
 		view_y = (int) (h / scale - view_height) / 2;
 	}
+	*/
     glViewport( 0, 0, w, h );			// Adjust viewport to new window
 
     // Switch back to (default) model view mode, for transformations
