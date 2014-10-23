@@ -9,12 +9,6 @@ class FractalView;
 
 class FractalView: public View
 {
-private:
-	double x;
-	double y;
-	double height;
-	double width;
-
 public:
 	list<Fractal::point> fractal;
 	

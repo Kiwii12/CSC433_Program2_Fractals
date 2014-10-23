@@ -11,11 +11,6 @@ class GeneratorView: public View
 {
 private:
 	bool rubberband;
-
-	double x;
-	double y;
-	double height;
-	double width;
 	
 public:
 	list<Fractal::point> generator;
