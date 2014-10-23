@@ -5,8 +5,9 @@ class InitiatorView;
 
 #include <list>
 #include "Fractal.h"
+#include "View.h"
 
-class InitiatorView
+class InitiatorView: public View
 {
 private:
 	bool rubberband;

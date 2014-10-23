@@ -5,8 +5,9 @@ class GeneratorView;
 
 #include <list>
 #include "Fractal.h"
+#include "View.h"
 
-class GeneratorView
+class GeneratorView: public View
 {
 private:
 	bool rubberband;

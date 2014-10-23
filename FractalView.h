@@ -5,8 +5,9 @@ class FractalView;
 
 #include <list>
 #include "Fractal.h"
+#include "View.h"
 
-class FractalView
+class FractalView: public View
 {
 private:
 	double x;
