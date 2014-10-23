@@ -20,7 +20,7 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
             {
                 // store start coordinates
                 startx = endx = x;
-                starty = endy = height - y;
+                starty = endy = y;
 
 				p.x = startx;
 				p.y = starty;
@@ -48,7 +48,7 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
 
                 // store end coordinates
                 endx = x;
-                endy = height - y;
+                endy =y;
 
 				p.x = endx;
 				p.y = endy;
@@ -90,7 +90,7 @@ void InitiatorView::mousedrag(double x, double y)
 
         // draw new (rubberbanded) rectangle
         endx = x;
-        endy = height - y;
+        endy = y;
         glBegin( GL_LINES );
 			glVertex2d( startx, starty );
 			glVertex2d( endx, endy );
