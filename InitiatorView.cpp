@@ -3,11 +3,10 @@
 InitiatorView::InitiatorView(double x, double y, double w, double h)
 	: View(x, y, w, h)
 {
-	double startx = 0;
-	double starty = 0;
-	double endx = 0;
-	double endy = 0;
-	int lastButton;
+	startx = 0;
+	starty = 0;
+	endx = 0;
+	endy = 0;
 }
 
 void InitiatorView::mouseclick(int button, int state, double x, double y)
