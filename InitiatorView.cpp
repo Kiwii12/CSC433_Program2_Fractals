@@ -1,4 +1,6 @@
 #include "InitiatorView.h"
+#include <iostream>
+using namespace std;
 
 InitiatorView::InitiatorView(double x, double y, double w, double h)
 	: View(x, y, w, h)
@@ -18,6 +20,7 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
         case 0:				// left button: create objects
             if ( state == 0 )		// press - new start point
             {
+				cout << "mouse click: left press at    (" << x << "," << y << ")\n";
                 // store start coordinates
                 startx = endx = x;
                 starty = endy = height - y;
@@ -36,6 +39,7 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
 					glVertex2d( startx, starty );
 					glVertex2d( endx, endy );
 				glEnd();
+				glFlush();
             }
 
             else if ( state == 1 )	// release - new endpoint
@@ -45,10 +49,11 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
 					glVertex2d( startx, starty );
 					glVertex2d( endx, endy );
 				glEnd();
+				glFlush();
 
                 // store end coordinates
                 endx = x;
-                endy = height - y;
+                endy = y;
 
 				p.x = endx;
 				p.y = endy;
@@ -87,14 +92,16 @@ void InitiatorView::mousedrag(double x, double y)
 			glVertex2d( startx, starty );
 			glVertex2d( endx, endy );
 		glEnd();
+		glFlush();
 
         // draw new (rubberbanded) rectangle
         endx = x;
-        endy = height - y;
+        endy = y;
         glBegin( GL_LINES );
 			glVertex2d( startx, starty );
 			glVertex2d( endx, endy );
 		glEnd();
+		glFlush();
     }
 }
 
