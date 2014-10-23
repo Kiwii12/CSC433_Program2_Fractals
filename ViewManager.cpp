@@ -133,13 +133,12 @@ bool ViewManager::switchView(string name)
 View* ViewManager::getRegisteredView(string name)
 {
 	// Use a try-catch to see if the item is in the map. If not, return NULL.
-	try
+	if (views.find(name) == views.end())
 	{
-		return views.at(name);
+		return views[name];
 	}
-	catch (int e)
+	else
 	{
-		e;
 		return NULL;
 	}
 }
