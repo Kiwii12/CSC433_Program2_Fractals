@@ -10,7 +10,7 @@ class InitiatorView;
 class InitiatorView: public View
 {
 private:
-	bool rubberband;
+	bool firstPoint;
 
 	
 public:

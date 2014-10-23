@@ -8,30 +8,40 @@ InitiatorView::InitiatorView(double x, double y, double w, double h)
 
 void InitiatorView::mouseclick(int button, int state, int x, int y)
 {
+	int startx = 0;
+	int starty = 0;
+	int endx = 0;
+	int endy = 0;
 	switch ( button )
     {
-        case MouseLeftButton:				// left button: create objects
-            if ( state == MouseButtonPress )		// press - new start point
+        case 0:				// left button: create objects
+            if ( state == 0 )		// press - new start point
             {
                 // store start coordinates
                 startx = endx = x;
-                starty = endy = ScreenHeight - y;
+                starty = endy = height - y;
 
                 // start XORing (rubberbanding)
                 glLogicOp( GL_XOR );
 
-                // draw first rectangle (actually unnecessary)
-                DrawRectangle( startx, starty, endx, endy, White );
+                // draw first Line (actually unnecessary)
+               	glBegin( GL_LINES );
+					glVertex2i( startx, starty );
+					glVertex2i( endx, endy );
+				glEnd();
             }
 
-            else if ( state == MouseButtonRelease )	// release - new endpoint
+            else if ( state == 1 )	// release - new endpoint
             {
                 // erase last rectangle (actually unnecessary)
-                DrawRectangle( startx, starty, endx, endy, White );
+                glBegin( GL_LINES );
+					glVertex2i( startx, starty );
+					glVertex2i( endx, endy );
+				glEnd();
 
                 // store end coordinates
                 endx = x;
-                endy = ScreenHeight - y;
+                endy = height - y;
 
                 // restore copy mode
                 glLogicOp( GL_COPY );
@@ -42,10 +52,7 @@ void InitiatorView::mouseclick(int button, int state, int x, int y)
 
             break;
 
-        case MouseMiddleButton:				// middle button: not used
-            break;
-
-        case MouseRightButton:				// right button: not used
+        case 2:				// Mouse right button
             break;
     }
 
