@@ -17,9 +17,9 @@ public:
 	
 	GeneratorView(double x = 0, double y = 0, double w = 0, double h = 0);
 	
-	void mouseclick(int button, int state, int x, int y);
-	void mousemove(int x, int y);
-	void mousedrag(int x, int y);
+	void mouseclick(int button, int state, double x, double y);
+	void mousemove(double x, double y);
+	void mousedrag(double x, double y);
 	void draw();
 };
 

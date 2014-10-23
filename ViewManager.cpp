@@ -17,7 +17,7 @@
  * @par Description: Constructor for the class. Initializes variables.
  *****************************************************************************/
 ViewManager::ViewManager()
-	: active_view(NULL)
+: active_view_name(""), active_view(NULL)
 {
 	
 }
@@ -84,6 +84,7 @@ bool ViewManager::unregisterView(string name)
 		if (active_view == v)
 		{
 			active_view = NULL;
+			active_view_name = "";
 		}
 		return true;
 	}
@@ -114,6 +115,7 @@ bool ViewManager::switchView(string name)
 		// Make the desired view active and show it
 		active_view = getRegisteredView(name);
 		active_view -> show();
+		active_view_name = name;
 		return true;
 	}
 	return false;
@@ -154,6 +156,19 @@ View* ViewManager::getRegisteredView(string name)
 View* ViewManager::getActiveView()
 {
 	return active_view;
+}
+
+/**************************************************************************//**
+ * @author Daniel Andrus
+ * 
+ * @par Description: Gets a pointer to the currently active view.
+ *
+ * @returns Name the currently active view is registered under, or an empty
+ *      string if no active view exists.
+ *****************************************************************************/
+string ViewManager::getActiveViewName()
+{
+	return active_view_name;
 }
 
 /**************************************************************************//**

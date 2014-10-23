@@ -59,19 +59,19 @@ public:
 	/*!
 	 * @brief Sends the view a click event.
 	 */
-	virtual void mouseclick( int button, int state, int x, int y ) = 0;
+	virtual void mouseclick(int button, int state, double x, double y) = 0;
 	
 	/*!
 	 * @brief Mouse movement callback. Executes whenever a mouse is moved
 	 *		inside the program window.
 	 */
-	virtual void mousemove(int x, int y) = 0;
+	virtual void mousemove(double x, double y) = 0;
 
 	/*!
 	 * @brief Mouse drag callback. Executes whenever a mouse is moved inside
 	 *		the program window while a button is pressed.
 	 */
-	virtual void mousedrag(int x, int y) = 0;
+	virtual void mousedrag(double x, double y) = 0;
 	
 };
 

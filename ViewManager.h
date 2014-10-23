@@ -31,6 +31,7 @@ class ViewManager : Drawable
 {
 protected:
 	map<string, View*> views;	/*!< Map of registered views */
+	string active_view_name;
 	View* active_view;			/*!< Pointer to currently active view */
 	
 public:
@@ -63,6 +64,11 @@ public:
 	 * @brief Gets a pointer to the view registered under the given name
 	 */
 	View* getRegisteredView(string name);
+	
+	/*!
+	 * @brief Gets the name that the currently active view is registered under
+	 */
+	string getActiveViewName();
 	
 	/*!
 	 * @brief Gets a pointer to the currently active view

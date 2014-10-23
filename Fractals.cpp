@@ -13,9 +13,9 @@ Fractals* Fractals::instance = NULL;
  *                          FUNCTION DEFINITIONS
 *******************************************************************************/
 Fractals::Fractals()
-	: view_x(0), view_y(0), view_width(735), view_height(480),
-	window_width(view_width), window_height(view_height), scale(1),
+	: window_width(view_width), window_height(view_height),
 	window_name("Fractals"),
+	view_x(0), view_y(0), view_width(735), view_height(480),
 	initiatorView(view_x, view_y, view_width, view_height),
 	generatorView(view_x, view_y, view_width, view_height),
 	fractalView(view_x, view_y, view_width, view_height)
@@ -86,6 +86,8 @@ int Fractals::run( int argc, char *argv[] )
 
 	// allow XORing
     glEnable( GL_COLOR_LOGIC_OP ); //used for rubberbanding
+
+	switchView("Initiator");
 
     // Go into OpenGL/GLUT main loop
     glutMainLoop();
@@ -291,8 +293,8 @@ void Fractals::mouseclick(int button, int state, int x, int y)
     y = window_height - y;
 
 	// Correct for scaling
-	x = (int) (x / scale);
-	y = (int) (y / scale);
+	x *= (int) (view_width / window_width);
+	y *= (int) (view_height / window_height);
 
 	x -= view_x;
 	y -= view_y;

@@ -6,7 +6,7 @@ InitiatorView::InitiatorView(double x, double y, double w, double h)
 	
 }
 
-void InitiatorView::mouseclick(int button, int state, int x, int y)
+void InitiatorView::mouseclick(int button, int state, double x, double y)
 {
 	int startx = 0;
 	int starty = 0;
@@ -59,12 +59,12 @@ void InitiatorView::mouseclick(int button, int state, int x, int y)
     lastbutton = button;
 }
 
-void InitiatorView::mousemove(int x, int y)
+void InitiatorView::mousemove(double x, double y)
 {
 	// TODO
 }
 
-void InitiatorView::mousedrag(int x, int y)
+void InitiatorView::mousedrag(double x, double y)
 {
 	// TODO
 }

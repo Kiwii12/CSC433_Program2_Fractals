@@ -6,17 +6,17 @@ GeneratorView::GeneratorView(double x, double y, double w, double h)
 	
 }
 
-void GeneratorView::mouseclick(int button, int state, int x, int y)
+void GeneratorView::mouseclick(int button, int state, double x, double y)
 {
 	// TODO
 }
 
-void GeneratorView::mousemove(int x, int y)
+void GeneratorView::mousemove(double x, double y)
 {
 	// TODO
 }
 
-void GeneratorView::mousedrag(int x, int y)
+void GeneratorView::mousedrag(double x, double y)
 {
 	// TODO
 }

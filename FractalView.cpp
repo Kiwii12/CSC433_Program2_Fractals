@@ -6,17 +6,17 @@ FractalView::FractalView(double x, double y, double w, double h)
 	
 }
 
-void FractalView::mouseclick(int button, int state, int x, int y)
+void FractalView::mouseclick(int button, int state, double x, double y)
 {
 	// TODO
 }
 
-void FractalView::mousemove(int x, int y)
+void FractalView::mousemove(double x, double y)
 {
 	// TODO
 }
 
-void FractalView::mousedrag(int x, int y)
+void FractalView::mousedrag(double x, double y)
 {
 	// TODO
 }
