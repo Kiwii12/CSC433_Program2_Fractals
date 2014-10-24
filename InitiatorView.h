@@ -10,13 +10,9 @@ class InitiatorView;
 class InitiatorView: public View
 {
 private:
-	bool firstPoint;
-
-	double startx;
-	double starty;
 	double endx;
 	double endy;
-	int lastButton;
+	bool leftButton;
 
 	
 public:

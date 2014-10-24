@@ -62,7 +62,7 @@ int Fractals::run( int argc, char *argv[] )
 	}
 
 	// Initialize glut with 32-bit graphics, double buffering, and anti-aliasing
-    glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_MULTISAMPLE );
+    glutInitDisplayMode( GLUT_RGBA /*| GLUT_DOUBLE*/ | GLUT_MULTISAMPLE );
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -146,12 +146,12 @@ void Fractals::display()
 	//clear the display and set backround to black
 	glClear( GL_COLOR_BUFFER_BIT );
 	glColor3f( 1.0, 1.0, 1.0 );
-    
+
 	ViewManager::draw();
 	DrawingManager::draw();
 
 	// Flush graphical output
-    glutSwapBuffers();
+    //glutSwapBuffers();
     glFlush();
 }
 
@@ -169,14 +169,15 @@ void Fractals::reshape(int w, int h)
     window_width = w;
     window_height = h;
 
+    glMatrixMode( GL_PROJECTION );		// Use an orthographic projection
+    glLoadIdentity();					// Initialize transformation matrix
+
 	/* Ignore window resizes and just roll with it. Just stretch the content.
 	 * Laziness to the max.
 	double ratio = (double) view_width / (double) view_height;
 	double scale;
 
     // Orthographic projection of 3-D scene onto 2-D, maintaining aspect ratio
-    glMatrixMode( GL_PROJECTION );		// Use an orthographic projection
-    glLoadIdentity();					// Initialize transformation matrix
 	if (w > h * ratio)					// Adjust viewport based on ratio
 	{
 		scale = (double) h / (double) view_height;
@@ -202,6 +203,7 @@ void Fractals::reshape(int w, int h)
 		view_y = (int) (h / scale - view_height) / 2;
 	}
 	*/
+	gluOrtho2D(0, view_width, 0, view_height);
     glViewport( 0, 0, w, h );			// Adjust viewport to new window
 
     // Switch back to (default) model view mode, for transformations
