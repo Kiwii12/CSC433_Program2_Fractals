@@ -90,7 +90,7 @@ int Fractals::run( int argc, char *argv[] )
 	// allow XORing
     glEnable( GL_COLOR_LOGIC_OP ); //used for rubberbanding
 
-	switchView("Initiator");
+	switchView("Generator");
 
     // Go into OpenGL/GLUT main loop
     glutMainLoop();
