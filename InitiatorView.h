@@ -13,7 +13,6 @@ private:
 	double endx;
 	double endy;
 	bool leftButton;
-
 	
 public:
 	list<Fractal::point> initiator;
