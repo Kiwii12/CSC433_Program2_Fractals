@@ -16,9 +16,9 @@ Fractals::Fractals()
 	: view_x(0), view_y(0), view_width(735), view_height(480),
 	window_width((int) view_width), window_height((int) view_height),
 	window_name("Fractals"),
-	initiatorView(view_x, view_y, view_width, view_height),
-	generatorView(view_x, view_y, view_width, view_height),
-	fractalView(view_x, view_y, view_width, view_height)
+	initiatorView(view_x + 10, view_y + 10, view_width - 20, view_height - 20),
+	generatorView(view_x + 10, view_y + 10, view_width - 20, view_height - 20),
+	fractalView(view_x + 10, view_y + 10, view_width - 20, view_height - 20)
 {
 	instance = this;
 	

@@ -11,7 +11,14 @@ InitiatorView::InitiatorView(double x, double y, double w, double h)
 void InitiatorView::mouseclick(int button, int state, double x, double y)
 {
 	Fractal::point p;
-	glColor3d( 1.0, 1.0, 1.0 ); //makes sure color is white  before draw
+	
+	// Cancel if point is outside view
+	if (state == 0
+		&& (x < this->x || y < this->y ||
+			x > this->x + this->width || y > this->y + this->height))
+	{
+		return;
+	}
 	
 	switch ( button )
     {
@@ -32,16 +39,46 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
                 endx = x;
                 endy = y;
 
+				glLogicOp(GL_XOR);
+
+				// Create new rubber banded line
+				glColor3d( 1.0, 1.0, 1.0 );
 				glBegin( GL_LINES );
 					glVertex2d( initiator.back().x, initiator.back().y );
 					glVertex2d( x, y );
 				glEnd();
+
+				if (initiator.size() > 1)
+				{
+					glLineStipple(3, 0xAAAA);
+					glEnable(GL_LINE_STIPPLE);
+					glBegin(GL_LINES);
+						if (initiator.size() > 2)
+						{
+							// Erase old dotted line
+							glVertex2d(initiator.back().x, initiator.back().y);
+							glVertex2d(initiator.front().x, initiator.front().y);
+						}
+
+						// Draw new dotted line
+						glVertex2d(x, y);
+						glVertex2d(initiator.front().x, initiator.front().y);
+					glEnd();
+					glDisable(GL_LINE_STIPPLE);
+				}
+				
 				glFlush();
+				glLogicOp(GL_COPY);
             }
 
-            else if ( state == 1 )	// release - new endpoint
+            else if ( state == 1 && leftButton)	// release - new endpoint
             {
 				leftButton = false;
+
+				if (x < this->x) x = this->x;
+				if (y < this->y) y = this->y;
+				if (x > this->x + this->width) x = this->x + this->width;
+				if (y > this->y + this->height) y = this->y + this->height;
 
                 p.x = x;
 				p.y = y;
@@ -93,16 +130,39 @@ void InitiatorView::mousedrag(double x, double y)
 			glVertex2d( endx, endy );
 		glEnd();
 
+		// If mouse is out of bounds, make it in bounds
+		if (x < this->x) x = this->x;
+		if (y < this->y) y = this->y;
+		if (x > this->x + this->width) x = this->x + this->width;
+		if (y > this->y + this->height) y = this->y + this->height;
+
         // draw new (rubberbanded) line
-        endx = x;
-        endy = y;
         glBegin( GL_LINES );
 			glVertex2d( initiator.back().x, initiator.back().y );
 			glVertex2d( x, y );
 		glEnd();
-		glFlush();
 		
+		if (initiator.size() > 1)
+		{
+			glLineStipple(3, 0xAAAA);
+			glEnable(GL_LINE_STIPPLE);
+			glBegin(GL_LINES);
+				// erase previous dotted line
+				glVertex2d(endx, endy);
+				glVertex2d(initiator.front().x, initiator.front().y);
+
+				// draw new connecting (rubberbanded) line
+				glVertex2d(x, y);
+				glVertex2d(initiator.front().x, initiator.front().y);
+			glEnd();
+			glDisable(GL_LINE_STIPPLE);
+		}
+		
+		glFlush();
 		glLogicOp(GL_COPY);
+		
+        endx = x;
+        endy = y;
     }
 }
 
@@ -125,14 +185,18 @@ void InitiatorView::draw()
 	
 	if (initiator.size() > 2)
 	{
-		glColor3d(0.75, 0.75, 0.75);
+		glLogicOp(GL_XOR);
+		
+		glColor3d(1.0, 1.0, 1.0);
 		glLineStipple(3, 0xAAAA);
 		glEnable(GL_LINE_STIPPLE);
 		glBegin(GL_LINES);
-		glVertex2d(initiator.back().x, initiator.back().y);
-		glVertex2d(initiator.front().x, initiator.front().y);
+			glVertex2d(initiator.back().x, initiator.back().y);
+			glVertex2d(initiator.front().x, initiator.front().y);
 		glEnd();
 		glDisable(GL_LINE_STIPPLE);
+
+		glLogicOp(GL_COPY);
 	}
 
 	View::draw();

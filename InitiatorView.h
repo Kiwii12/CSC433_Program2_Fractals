@@ -18,8 +18,7 @@ private:
 public:
 	list<Fractal::point> initiator;
 	
-	InitiatorView(double x = 0, double y = 0, double w = 0, 
-								double h = 0);
+	InitiatorView(double x = 0, double y = 0, double w = 0, double h = 0);
 	
 	void mouseclick(int button, int state, double x, double y);
 	void mousemove(double x, double y);
