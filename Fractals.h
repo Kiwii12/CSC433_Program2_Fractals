@@ -54,8 +54,20 @@ public:
 	GeneratorView* generatorView;/*!< View controller for generator view */
 	FractalView* fractalView;	/*!< View controller for fractal view */
 
+	/*!
+	* @brief Constructor, allocates pointers for Initiator, generator and Fractal
+	*		views as well as initializes private data.
+	*/
 	Fractals();
+
+	/*!
+	* @brief Destructor, removes pointers.
+	*/
 	~Fractals();
+
+	/*!
+	* @brief Function to get the current instance of the program.
+	*/
 	int run( int argc, char *argv[] );
 
 
