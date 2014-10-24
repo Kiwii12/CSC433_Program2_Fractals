@@ -48,12 +48,12 @@ private:
 	double view_width;				/*!< The width of the drawable region */
 	double view_height;			/*!< The height of the drawable region */
 	string window_name;			/*!< Name of the gui window */
-	
-	InitiatorView initiatorView;/*!< View controller for initiator view */
-	GeneratorView generatorView;/*!< View controller for generator view */
-	FractalView fractalView;	/*!< View controller for fractal view */
 
 public:
+	InitiatorView* initiatorView;/*!< View controller for initiator view */
+	GeneratorView* generatorView;/*!< View controller for generator view */
+	FractalView* fractalView;	/*!< View controller for fractal view */
+
 	Fractals();
 	~Fractals();
 	int run( int argc, char *argv[] );

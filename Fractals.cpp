@@ -15,21 +15,30 @@ Fractals* Fractals::instance = NULL;
 Fractals::Fractals()
 	: view_x(0), view_y(0), view_width(735), view_height(480),
 	window_width((int) view_width), window_height((int) view_height),
-	window_name("Fractals"),
-	initiatorView(view_x + 10, view_y + 10, view_width - 20, view_height - 20),
-	generatorView(view_x + 10, view_y + 10, view_width - 20, view_height - 20),
-	fractalView(view_x + 10, view_y + 10, view_width - 20, view_height - 20)
+	window_name("Fractals")
 {
 	instance = this;
 	
-	registerView("Fractal", &fractalView);
-	registerView("Initiator", &initiatorView);
-	registerView("Generator", &generatorView);
+	initiatorView = new (nothrow) InitiatorView(
+		view_x + 10, view_y + 10, view_width - 20, view_height - 20
+	);
+	generatorView = new (nothrow) GeneratorView(
+		view_x + 10, view_y + 10, view_width - 20, view_height - 20
+	);
+	fractalView = new (nothrow) FractalView(
+		view_x + 10, view_y + 10, view_width - 20, view_height - 20
+	);
+
+	registerView("Fractal", fractalView);
+	registerView("Initiator", initiatorView);
+	registerView("Generator", generatorView);
 }
 
 Fractals::~Fractals()
 {
-
+	delete initiatorView;
+	delete generatorView;
+	delete fractalView;
 }
 
 /***************************************************************************//**
