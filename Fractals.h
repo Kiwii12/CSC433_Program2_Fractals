@@ -50,6 +50,15 @@ private:
 	string window_name;			/*!< Name of the gui window */
 
 public:
+	static const double vview_x;
+	static const double vview_y;
+	static const double vview_w;
+	static const double vview_h;
+	static const double button_x;
+	static const double button_y;
+	static const double button_w;
+	static const double button_h;
+	
 	InitiatorView* initiatorView;/*!< View controller for initiator view */
 	GeneratorView* generatorView;/*!< View controller for generator view */
 	FractalView* fractalView;	/*!< View controller for fractal view */
@@ -85,6 +94,11 @@ public:
 	* @brief Gets the height of the view port in the virtual space.
 	*/
 	double getViewHeight();
+
+	/*!
+	 * @brief Drawing function. Calls superclass functions.
+	 */
+	void draw();
 
 	/*!
 	* @brief Drawing callback. Executes every glut display callaback. Also

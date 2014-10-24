@@ -8,25 +8,34 @@
 #include "Fractals.h"
 
 Fractals* Fractals::instance = NULL;
+const double Fractals::vview_x = 16.0;
+const double Fractals::vview_y = 16.0;
+const double Fractals::vview_w = 704.0;
+const double Fractals::vview_h = 512.0;
+const double Fractals::button_w = 100.0;
+const double Fractals::button_h = 32.0;
+const double Fractals::button_x = vview_x + vview_w - button_w;
+const double Fractals::button_y = vview_y * 2 + vview_h;
 
 /*******************************************************************************
  *                          FUNCTION DEFINITIONS
 *******************************************************************************/
 Fractals::Fractals()
-	: view_x(0), view_y(0), view_width(735), view_height(480),
-	window_width((int) view_width), window_height((int) view_height),
-	window_name("Fractals")
+: view_x(0), view_y(0), view_width(vview_w + 32),
+view_height(vview_h + button_h + vview_y * 3),
+window_width((int) view_width), window_height((int) view_height),
+window_name("Fractals")
 {
 	instance = this;
 	
 	initiatorView = new (nothrow) InitiatorView(
-		view_x + 10, view_y + 10, view_width - 20, view_height - 20
+		vview_x, vview_y, vview_w, vview_h
 	);
 	generatorView = new (nothrow) GeneratorView(
-		view_x + 10, view_y + 10, view_width - 20, view_height - 20
+		vview_x, vview_y, vview_w, vview_h
 	);
 	fractalView = new (nothrow) FractalView(
-		view_x + 10, view_y + 10, view_width - 20, view_height - 20
+		vview_x, vview_y, vview_w, vview_h
 	);
 
 	registerView("Fractal", fractalView);
@@ -81,7 +90,7 @@ int Fractals::run( int argc, char *argv[] )
     glutCreateWindow( window_name.c_str() );         // window title
 
 	// Always clear screen to black
-	glClearColor( 0, 0, 0, 1.0 );
+	glClearColor( 1.0, 1.0, 1.0, 1.0 );
 
 	glutIgnoreKeyRepeat(1);
 
@@ -99,7 +108,7 @@ int Fractals::run( int argc, char *argv[] )
 	// allow XORing
     glEnable( GL_COLOR_LOGIC_OP ); //used for rubberbanding
 
-	switchView("Generator");
+	switchView("Initiator");
 
     // Go into OpenGL/GLUT main loop
     glutMainLoop();
@@ -144,6 +153,14 @@ double Fractals::getViewHeight()
 	return view_height;
 }
 
+void Fractals::draw()
+{
+
+
+	ViewManager::draw();
+	DrawingManager::draw();
+}
+
 /***************************************************************************//**
  * @author Daniel Andrus, Johnny Ackerman
  * 
@@ -160,7 +177,6 @@ void Fractals::display()
 	DrawingManager::draw();
 
 	// Flush graphical output
-    //glutSwapBuffers();
     glFlush();
 }
 
@@ -175,45 +191,15 @@ void Fractals::display()
 void Fractals::reshape(int w, int h)
 {
 	// store new window dimensions globally
-    window_width = w;
-    window_height = h;
+    view_width = window_width = w;
+    view_height = window_height = h;
 
     glMatrixMode( GL_PROJECTION );		// Use an orthographic projection
     glLoadIdentity();					// Initialize transformation matrix
-
-	/* Ignore window resizes and just roll with it. Just stretch the content.
-	 * Laziness to the max.
-	double ratio = (double) view_width / (double) view_height;
-	double scale;
-
-    // Orthographic projection of 3-D scene onto 2-D, maintaining aspect ratio
-	if (w > h * ratio)					// Adjust viewport based on ratio
-	{
-		scale = (double) h / (double) view_height;
-		this -> scale = scale;
-		gluOrtho2D( 0 - ((w / scale) - view_width) / 2,
-			view_width + ((w / scale) - view_width) / 2,
-			0,
-			view_height );
-		
-		view_x = (int) (w / scale - view_width) / 2;
-		view_y = 0;
-	}
-	else
-	{
-		scale = (double) w / (double) view_width;
-		this -> scale = scale;
-		gluOrtho2D( 0,
-			view_width,
-			0 - ((h / scale) - view_height) / 2,
-			view_height + ((h / scale) - view_height) / 2 );
-
-		view_x = 0;
-		view_y = (int) (h / scale - view_height) / 2;
-	}
-	*/
+	
+	// Adjust viewport and map to window
 	gluOrtho2D(0, view_width, 0, view_height);
-    glViewport( 0, 0, w, h );			// Adjust viewport to new window
+    glViewport( 0, 0, window_width, window_height );
 
     // Switch back to (default) model view mode, for transformations
     glMatrixMode( GL_MODELVIEW );

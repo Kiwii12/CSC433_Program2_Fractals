@@ -5,7 +5,9 @@ class InitiatorView;
 
 #include <list>
 #include "Fractal.h"
+#include "Fractals.h"
 #include "View.h"
+#include "Button.h"
 
 class InitiatorView: public View
 {
@@ -13,7 +15,8 @@ private:
 	double endx;
 	double endy;
 	bool leftButton;
-	
+	Button clear_button;
+
 public:
 	list<Fractal::point> initiator;
 	
