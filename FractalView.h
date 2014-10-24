@@ -7,9 +7,16 @@ class FractalView;
 #include "Fractal.h"
 #include "Fractals.h"
 #include "View.h"
+#include "Button.h"
 
 class FractalView : public View
 {
+private:
+	bool generated;
+	bool generating;
+	int generror;
+	Button build_button;
+
 public:
 	list<Fractal::point> fractal;
 	
@@ -22,9 +29,6 @@ public:
 	void mousedrag(double x, double y);
 
 	void draw();
-
-private:
-	bool notGenerated;
 };
 
 #endif

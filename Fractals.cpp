@@ -14,7 +14,7 @@ const double Fractals::vview_w = 704.0;
 const double Fractals::vview_h = 512.0;
 const double Fractals::button_w = 100.0;
 const double Fractals::button_h = 32.0;
-const double Fractals::button_x = vview_x + vview_w - button_w;
+const double Fractals::button_x = vview_x + vview_w - button_w * 2;
 const double Fractals::button_y = vview_y * 2 + vview_h;
 
 /*******************************************************************************
@@ -28,6 +28,7 @@ window_name("Fractals")
 {
 	instance = this;
 	
+	// Generate views
 	initiatorView = new (nothrow) InitiatorView(
 		vview_x, vview_y, vview_w, vview_h
 	);
@@ -38,9 +39,56 @@ window_name("Fractals")
 		vview_x, vview_y, vview_w, vview_h
 	);
 
+	// Register views
 	registerView("Fractal", fractalView);
 	registerView("Initiator", initiatorView);
 	registerView("Generator", generatorView);
+
+	// Generate tabs
+	tabs.push_back(new (nothrow) TabButton("Fractal",
+		vview_x, vview_y * 2 + vview_h, button_w, button_h
+	));
+	tabs.push_back(new (nothrow) TabButton("Initiator",
+		vview_x * 2 + button_w, vview_y * 2 + vview_h, button_w, button_h
+	));
+	tabs.push_back(new (nothrow) TabButton("Generator",
+		vview_x * 3 + button_w * 2, vview_y * 2 + vview_h, button_w, button_h
+	));
+
+	// Give tabs some action
+	tabs[0]->setAction([](){
+		for (auto tab : Fractals::getInstance()->tabs)
+		{
+			tab->active = false;
+		}
+		Fractals::getInstance()->tabs[0]->active = true;
+		Fractals::getInstance()->switchView("Fractal");
+		glutPostRedisplay();
+	});
+	tabs[1]->setAction([](){
+		for (auto tab : Fractals::getInstance()->tabs)
+		{
+			tab->active = false;
+		}
+		Fractals::getInstance()->tabs[1]->active = true;
+		Fractals::getInstance()->switchView("Initiator");
+		glutPostRedisplay();
+	});
+	tabs[2]->setAction([](){
+		for (auto tab : Fractals::getInstance()->tabs)
+		{
+			tab->active = false;
+		}
+		Fractals::getInstance()->tabs[2]->active = true;
+		Fractals::getInstance()->switchView("Generator");
+		glutPostRedisplay();
+	});
+
+	// And finally... register the buttons
+	for (auto tab : tabs)
+	{
+		drawObject(tab);
+	}
 }
 
 Fractals::~Fractals()
@@ -48,6 +96,11 @@ Fractals::~Fractals()
 	delete initiatorView;
 	delete generatorView;
 	delete fractalView;
+
+	for (auto tab : tabs)
+	{
+		delete tab;
+	}
 }
 
 /***************************************************************************//**
@@ -62,8 +115,6 @@ Fractals::~Fractals()
 *******************************************************************************/
 int Fractals::run( int argc, char *argv[] )
 {
-	srand((unsigned int) time(NULL));
-
 	window_width = (int) view_width;
 	window_height = (int) view_height;
 
@@ -104,11 +155,9 @@ int Fractals::run( int argc, char *argv[] )
     glutMouseFunc( *::mouseclick );
 	glutMotionFunc( *::mousedrag );
 	glutPassiveMotionFunc( *::mousemove );
-
-	// allow XORing
-    glEnable( GL_COLOR_LOGIC_OP ); //used for rubberbanding
-
-	switchView("Initiator");
+	
+	tabs[0]->active = true;
+	switchView("Fractal");
 
     // Go into OpenGL/GLUT main loop
     glutMainLoop();
@@ -303,6 +352,13 @@ void Fractals::mouseclick(int button, int state, int x, int y)
 	vx -= view_x;
 	vy -= view_y;
 
+	// Forward event to tabs
+	for (auto tab : tabs)
+	{
+		tab->mouseclick(button, state, vx, vy);
+	}
+
+	// Forward event to active view
 	if (getActiveView() != NULL)
 	{
 		getActiveView()->mouseclick(button, state, vx, vy);
@@ -334,6 +390,13 @@ void Fractals::mousemove(int x, int y)
 	vx -= view_x;
 	vy -= view_y;
 
+	// Forward event to tabs
+	for (auto tab : tabs)
+	{
+		tab->mousemove(vx, vy);
+	}
+
+	// Forward event to active view
 	if (getActiveView() != NULL)
 	{
 		getActiveView()->mousemove(vx, vy);
@@ -365,6 +428,13 @@ void Fractals::mousedrag(int x, int y)
 	vx -= view_x;
 	vy -= view_y;
 
+	// Forward event to tabs
+	for (auto tab : tabs)
+	{
+		tab->mousedrag(vx, vy);
+	}
+
+	// Forward event to active view
 	if (getActiveView() != NULL)
 	{
 		getActiveView()->mousedrag(vx, vy);

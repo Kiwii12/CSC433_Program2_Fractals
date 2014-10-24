@@ -14,16 +14,15 @@ class Fractals;
 
 #include <iostream>
 #include <string>
-#include <map>
-#include <list>
 #include <GL/freeglut.h>
-#include <time.h>
+#include <vector>
 #include "DrawingManager.h"
 
 #include "ViewManager.h"
 #include "InitiatorView.h"
 #include "GeneratorView.h"
 #include "FractalView.h"
+#include "TabButton.h"
 
 using namespace std;
 
@@ -62,6 +61,7 @@ public:
 	InitiatorView* initiatorView;/*!< View controller for initiator view */
 	GeneratorView* generatorView;/*!< View controller for generator view */
 	FractalView* fractalView;	/*!< View controller for fractal view */
+	vector<TabButton*> tabs;
 
 	/*!
 	* @brief Constructor, allocates pointers for Initiator, generator and Fractal

@@ -11,7 +11,7 @@ using namespace std;
 
 class Button : public Drawable
 {
-private:
+protected:
 	string label;
 	double x;
 	double y;

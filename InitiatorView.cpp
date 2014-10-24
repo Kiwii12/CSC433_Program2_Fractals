@@ -1,8 +1,8 @@
 #include "InitiatorView.h"
 
 InitiatorView::InitiatorView(double x, double y, double w, double h)
-: View(x, y, w, h), clear_button("Clear", Fractals::button_x,
-Fractals::button_y, Fractals::button_w, Fractals::button_h)
+: View(x, y, w, h), clear_button("Clear Initiator", Fractals::button_x,
+Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 {
 	clear_button.setAction([](){
 		Fractals::getInstance()->initiatorView->initiator.clear();
@@ -144,10 +144,10 @@ void InitiatorView::draw()
 	glEnd();
 	glBegin(GL_LINE_LOOP);
 	{
-		glVertex2d(x - 0.5, y - 0.5);
-		glVertex2d(x - 0.5, y + height + 0.5);
-		glVertex2d(x + width + 0.5, y + height + 0.5);
-		glVertex2d(x + width + 0.5, y - 0.5);
+		glVertex2d(x + 0.5, y + 0.5);
+		glVertex2d(x + 0.5, y + height - 0.5);
+		glVertex2d(x + width - 0.5, y + height - 0.5);
+		glVertex2d(x + width - 0.5, y + 0.5);
 	}
 	glEnd();
 

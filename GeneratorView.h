@@ -5,15 +5,17 @@ class GeneratorView;
 
 #include <list>
 #include "Fractal.h"
+#include "Fractals.h"
 #include "View.h"
+#include "Button.h"
 
 class GeneratorView: public View
 {
 private:
-	bool rubberband;
 	double endx;
 	double endy;
 	bool leftButton;
+	Button clear_button;
 	
 public:
 	list<Fractal::point> generator;

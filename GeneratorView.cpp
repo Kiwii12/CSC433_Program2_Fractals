@@ -1,8 +1,16 @@
 #include "GeneratorView.h"
 
 GeneratorView::GeneratorView(double x, double y, double w, double h)
-	: View(x, y, w, h)
+	: View(x, y, w, h), clear_button("Clear Generator", Fractals::button_x,
+Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 {
+	clear_button.setAction([](){
+		Fractals::getInstance()->generatorView->generator.clear();
+		Fractals::getInstance()->generatorView->draw();
+		glFlush();
+	});
+	drawObject(&clear_button);
+
 	endx = 0;
 	endy = 0;
 	leftButton = false;
@@ -10,6 +18,8 @@ GeneratorView::GeneratorView(double x, double y, double w, double h)
 
 void GeneratorView::mouseclick(int button, int state, double x, double y)
 {
+	clear_button.mouseclick(button, state, x, y);
+
 	Fractal::point p;
 	
 	// Cancel if point is outside view
@@ -35,21 +45,12 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
 					p.distance = 0;
 					generator.push_back(p);
 				}
-                // store end coordinates
+                // store mouse coordinates
                 endx = x;
                 endy = y;
 
-				glLogicOp(GL_XOR);
-
-				// Create new rubber banded line
-				glColor3d( 1.0, 1.0, 1.0 );
-				glBegin( GL_LINES );
-					glVertex2d( generator.back().x, generator.back().y );
-					glVertex2d( x, y );
-				glEnd();
-				
+				draw();
 				glFlush();
-				glLogicOp(GL_COPY);
             }
 
             else if ( state == 1 && leftButton)	// release - new endpoint
@@ -68,7 +69,8 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
 				generator.push_back(p);
 
                 // force redraw
-                glutPostRedisplay();
+				draw();
+				glFlush();
             }
 
             break;
@@ -95,49 +97,62 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
 
 void GeneratorView::mousemove(double x, double y)
 {
-	// TODO
+	clear_button.mousemove(x, y);
 }
 
 void GeneratorView::mousedrag(double x, double y)
 {
 	if (generator.size() > 0 && leftButton) //left Mouse Button
     {
-		glColor3d( 1.0, 1.0, 1.0 ); //makes sure color is white before draw
-		glLogicOp(GL_XOR);
-
-        // erase previous line
-        glBegin( GL_LINES );
-			glVertex2d( generator.back().x, generator
-				.back().y );
-			glVertex2d( endx, endy );
-		glEnd();
-
 		// If mouse is out of bounds, make it in bounds
 		if (x < this->x) x = this->x;
 		if (y < this->y) y = this->y;
 		if (x > this->x + this->width) x = this->x + this->width;
 		if (y > this->y + this->height) y = this->y + this->height;
 
-        // draw new (rubberbanded) line
-        glBegin( GL_LINES );
-			glVertex2d( generator.back().x, generator.back().y );
-			glVertex2d( x, y );
-		glEnd();
-		
-		glFlush();
-		glLogicOp(GL_COPY);
-		
         endx = x;
         endy = y;
+
+		draw();
+		glFlush();
     }
 }
 
 void GeneratorView::draw()
 {
-	// Display every line in initiator
+	const static double grid_spacing = 32.0;
+
+	// Draw background
+	glColor3ub(255, 255, 255);
+	glRectd(x, y, x+width, y+height);
+
+	// Draw grid
+	glColor3f(0.75, 0.75, 0.75);
+	glBegin(GL_LINES);
+	for (double i = grid_spacing; i < width; i += grid_spacing)
+	{
+		glVertex2d(x + i - 0.5, y);
+		glVertex2d(x + i - 0.5, y + height);
+	}
+	for (double i = grid_spacing; i < height; i += grid_spacing)
+	{
+		glVertex2d(x, y + i - 0.5);
+		glVertex2d(x + width, y + i - 0.5);
+	}
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex2d(x + 0.5, y + 0.5);
+		glVertex2d(x + 0.5, y + height - 0.5);
+		glVertex2d(x + width - 0.5, y + height - 0.5);
+		glVertex2d(x + width - 0.5, y + 0.5);
+	}
+	glEnd();
+
+	// Display every line in generator
+	glColor3f(0.0, 0.0, 0.0);
 	if (generator.size() > 1)
 	{
-		glColor3d(1.0, 1.0, 1.0);
 		glBegin(GL_LINES);
 		auto it1 = generator.begin();
 		auto it2 = generator.begin();
@@ -148,15 +163,14 @@ void GeneratorView::draw()
 		}
 		glEnd();
 	}
-	
-	if (generator.size() > 2)
-	{
-		glLogicOp(GL_XOR);
-		
-		glColor3d(1.0, 1.0, 1.0);
-		glLineStipple(3, 0xAAAA);
 
-		glLogicOp(GL_COPY);
+	// Draw rubberband line
+	if (leftButton)
+	{
+		glBegin(GL_LINES);
+		glVertex2d(generator.back().x, generator.back().y);
+		glVertex2d(endx, endy);
+		glEnd();
 	}
 
 	View::draw();
