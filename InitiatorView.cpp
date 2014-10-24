@@ -31,6 +31,12 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
                 // store end coordinates
                 endx = x;
                 endy = y;
+
+				glBegin( GL_LINES );
+					glVertex2d( initiator.back().x, initiator.back().y );
+					glVertex2d( x, y );
+				glEnd();
+				glFlush();
             }
 
             else if ( state == 1 )	// release - new endpoint
@@ -92,7 +98,7 @@ void InitiatorView::mousedrag(double x, double y)
         endy = y;
         glBegin( GL_LINES );
 			glVertex2d( initiator.back().x, initiator.back().y );
-			glVertex2d( endx, endy );
+			glVertex2d( x, y );
 		glEnd();
 		glFlush();
 		
