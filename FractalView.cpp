@@ -6,8 +6,7 @@ Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 {
 	build_button.setAction([](){
 		Fractals::getInstance()->fractalView->calculate();
-		Fractals::getInstance()->fractalView->draw();
-		glFlush();
+		glutPostRedisplay();
 	});
 	drawObject(&build_button);
 	
@@ -24,16 +23,59 @@ void FractalView::calculate()
 	generror = 0;
 
 	// Get shortcut pointers to initiator and generator
-	list<Fractal::point>* initiator = &(Fractals::getInstance() -> initiatorView -> initiator);
-	list<Fractal::point>* generator = &(Fractals::getInstance() -> generatorView -> generator);
+	list<Fractal::point>* initiator = 
+				&(Fractals::getInstance() -> initiatorView -> initiator);
+	list<Fractal::point>* generator =
+				&(Fractals::getInstance() -> generatorView -> generator);
 
 	// Make sure both have minimum number of points
-	if( initiator->size() < 3 || generator->size() < 2 )
+	if(initiator->size() < 3 || generator->size() < 3)
 	{
-		generror = 1;
+		generror = (initiator->size() < 3 ? 1 : 2);
 		generating = false;
 		return;
 	}
+
+	// Fill the initiator and generator
+	completePoints(initiator);
+	completePoints(generator);
+
+	// Make generator is valid
+	unsigned int i = 0;
+	for (auto it = generator->begin();
+		it != generator->end() && i < generator->size()-1;
+		it++, i++)
+	{
+		// checks if segment distance is longer than total length
+		if (it->distance >= generator->back().distance)
+		{
+			// Cancel generation and leave an error code
+			generating = false;
+			generror = 3;
+			return;
+		}
+	}
+
+	// Clear our current fractal
+	fractal.clear();
+	generated = false;
+
+	// Copy initiator into fractal
+	fractal.insert(fractal.end(), initiator->begin(), initiator->end());
+
+	// ... for calculations
+	generator->back().angle += PI;
+
+	// Time to build fractal
+	for (auto it = fractal.begin(), it2 = it; it != fractal.end(); it=it2)
+	{
+		it2++;
+		fractalize(it, fractal, *generator);
+	}
+
+	generated = true;
+	generating = false;
+	generror = 0;
 }
 
 void FractalView::mouseclick(int button, int state, double x, double y)
@@ -95,4 +137,85 @@ void FractalView::draw()
 	}
 
 	View::draw();
+}
+
+void FractalView::completePoints(list<Fractal::point>* points)
+{
+	// Loop through every point in list
+	auto it1 = points->begin();
+	auto it2 = it1;
+	for (it2++; it1 != points->end(); it1++, it2++)
+	{
+		// Wrap around
+		if (it2 == points->end()) it2 = points->begin();
+
+		// Calculate distance
+		it1->distance = sqrt((it2->x - it1->x) * (it2->x - it1->x)
+						+ (it2->y - it1->y) * (it2->y - it1->y));
+
+		// Calculate angle, special case for vertical lines & x2 < x1
+		// Will give us an angle between -90 <= x < 270 in radians
+		it1->angle =
+			(it2->x == it1->x ?		// If x1 == x2
+				(it2->y > it1->y ?		// If y2 > y1
+					PI/2.0					// angle is 90
+					: -PI/2.0)				// else, angle is 270
+				: atan((it2->y - it1->y) / (it2->x - it1->x)))
+			+ (it2->x < it1->x ? PI : 0);	// adjust for x2 < x1
+	}
+}
+
+void FractalView::fractalize(
+		list<Fractal::point>::iterator it,
+		list<Fractal::point> &fractal,
+		const list<Fractal::point> &generator)
+{
+	// Base case
+	if (it->distance <= 1)
+	{
+		return;
+	}
+	
+	double x = it->x;
+	double y = it->y;
+	double distance = it->distance;
+	double angle = it->angle;
+
+	// Replace line segment with generator
+	auto it2 = it;
+	unsigned int i = 0;
+	for (Fractal::point p : generator)
+	{
+		// Set new distance and angle for old point
+		it2->distance = ((p.distance * distance) / generator.back().distance);
+		it2->angle = (p.angle + angle - generator.back().angle);
+
+		// Set new point's x and y
+		p.x = it2->x + (it2->distance * cos(it2->angle));
+		p.y = it2->y + (it2->distance * sin(it2->angle));
+
+		if (i < generator.size() - 2)
+		{
+			// Insert new point
+			it2++;
+			fractal.insert(it2, p);
+			it2--;
+		}
+		else
+		{
+			break;
+		}
+		i++;
+	}
+
+	// Make recursive calls
+	it2 = it;
+	for (i = 0; i < generator.size() - 1; i++)
+	{
+		it2++;
+		fractalize(it, fractal, generator);
+		it = it2;
+	}
+
+	// END
 }
