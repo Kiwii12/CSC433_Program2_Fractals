@@ -16,6 +16,11 @@ Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 	leftButton = false;
 }
 
+GeneratorView::~GeneratorView()
+{
+	generator.clear();
+}
+
 void GeneratorView::mouseclick(int button, int state, double x, double y)
 {
 	clear_button.mouseclick(button, state, x, y);

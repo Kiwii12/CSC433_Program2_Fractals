@@ -6,6 +6,11 @@ TabButton::TabButton(string l, double x, double y, double w, double h)
 
 }
 
+TabButton::~TabButton()
+{
+
+}
+
 void TabButton::draw()
 {
 	// Back up status

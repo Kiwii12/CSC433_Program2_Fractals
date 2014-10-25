@@ -34,7 +34,15 @@ public:
 
 	int lastButton;
 	
+	/*!
+	 * @brief Constructor. Initializes variables.
+	 */
 	View(double x = 0, double y = 0, double w = 0, double h = 0);
+	
+	/*!
+	 * @brief Destructor. Exists because this is a virtual class.
+	 */
+	virtual ~View();
 
 	/*!
 	 * @brief Allows this object to be drawn.

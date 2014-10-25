@@ -21,6 +21,7 @@ public:
 	list<Fractal::point> generator;
 	
 	GeneratorView(double x = 0, double y = 0, double w = 0, double h = 0);
+	~GeneratorView();
 	
 	void mouseclick(int button, int state, double x, double y);
 	void mousemove(double x, double y);

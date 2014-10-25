@@ -3,7 +3,12 @@
 Button::Button(string l, double x, double y, double w, double h)
 : label(l), x(x), y(y), width(w), height(h), hover(false), pressed(false)
 {
+	
+}
 
+Button::~Button()
+{
+	
 }
 
 void Button::setAction(function<void()> action)
@@ -78,8 +83,6 @@ void Button::mousedrag(double x, double y)
 
 void Button::draw()
 {
-	static const double border = 1;
-
 	if (hover)
 	{
 		if (pressed)

@@ -17,12 +17,13 @@ protected:
 	double y;
 	double width;
 	double height;
-	bool pressed;
 	bool hover;
+	bool pressed;
 	function<void()> callback;
 
 public:
 	Button(string l, double x, double y, double w, double h);
+	virtual ~Button();
 
 	void setAction(function<void()> action);
 	void mouseclick(int button, int state, double x, double y);

@@ -25,6 +25,14 @@ View::View(double x, double y, double w, double h)
 /**************************************************************************//**
  * @author Daniel Andrus
  * 
+ * @par Description: Destructor. Does nothing, exists to resolve warnings.
+ *****************************************************************************/
+View::~View()
+{ }
+
+/**************************************************************************//**
+ * @author Daniel Andrus
+ * 
  * @par Description: Reveals the object. Allows the object to be drawn.
  *****************************************************************************/
 void View::show()

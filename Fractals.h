@@ -40,12 +40,12 @@ class Fractals : public DrawingManager, public ViewManager
 {
 private:
 	static Fractals* instance;	/*!< reference to main instance */
-	int window_width;			/*!< Width of gui window */
-	int window_height;			/*!< Height of gui window */
 	double view_x;					/*!< The x offset of the drawing region */
 	double view_y;					/*!< The y offset of the drawing region */
 	double view_width;				/*!< The width of the drawable region */
 	double view_height;			/*!< The height of the drawable region */
+	int window_width;			/*!< Width of gui window */
+	int window_height;			/*!< Height of gui window */
 	string window_name;			/*!< Name of the gui window */
 
 public:

@@ -14,6 +14,7 @@ public:
 	bool active;
 
 	TabButton(string l, double x, double y, double w, double h);
+	~TabButton();
 	void draw();
 };
 

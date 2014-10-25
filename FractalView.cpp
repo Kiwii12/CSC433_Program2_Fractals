@@ -15,6 +15,11 @@ Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 	generror = 0;
 }
 
+FractalView::~FractalView()
+{
+	fractal.clear();
+}
+
 void FractalView::calculate()
 {
 	// Reset variables
@@ -176,8 +181,6 @@ void FractalView::fractalize(
 		return;
 	}
 	
-	double x = it->x;
-	double y = it->y;
 	double distance = it->distance;
 	double angle = it->angle;
 
