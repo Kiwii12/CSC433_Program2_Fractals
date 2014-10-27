@@ -31,7 +31,7 @@ class ViewManager : Drawable
 {
 protected:
 	map<string, View*> views;	/*!< Map of registered views */
-	string active_view_name;
+	string active_view_name;	/*!< holds the current view */
 	View* active_view;			/*!< Pointer to currently active view */
 	
 public:

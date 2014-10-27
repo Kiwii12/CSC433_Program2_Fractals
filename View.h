@@ -27,12 +27,12 @@ private:
 	bool hidden;		/*!< Whether or not view is shown on screen */
 
 public:
-	double x;
-	double y;
-	double width;
-	double height;
+	double x;			/*!< Bottom left x coordinant of the window */
+	double y;			/*!< Bottom left y coordinant of the window */
+	double width;		/*!< Width of the View Window */
+	double height;		/*!< Height of the View Window */
 
-	int lastButton;
+	int lastButton;		/*!< The last Button of the Mouse that was pressed */
 	
 	/*!
 	 * @brief Constructor. Initializes variables.

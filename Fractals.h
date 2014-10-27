@@ -49,14 +49,14 @@ private:
 	string window_name;			/*!< Name of the gui window */
 
 public:
-	static const double vview_x;
-	static const double vview_y;
-	static const double vview_w;
-	static const double vview_h;
-	static const double button_x;
-	static const double button_y;
-	static const double button_w;
-	static const double button_h;
+	static const double vview_x;	/*!< left side coordinant of draw area */
+	static const double vview_y;	/*!< bottom coordinant of draw area */
+	static const double vview_w;	/*!< Width of draw window */
+	static const double vview_h;	/*!< height of draw window */
+	static const double button_x;	/*!< left coordinant of button */
+	static const double button_y;	/*!< right coordinant of button */
+	static const double button_w;	/*!< width of button */
+	static const double button_h;	/*!< height of button */
 	
 	InitiatorView* initiatorView;/*!< View controller for initiator view */
 	GeneratorView* generatorView;/*!< View controller for generator view */
