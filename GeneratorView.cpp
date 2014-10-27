@@ -1,5 +1,20 @@
+/*******************************************************************************
+ *                 DECLARATIONS, INCLUDES, AND NAMESPACES
+*******************************************************************************/
 #include "GeneratorView.h"
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Constructor - initilizes data, and creates a window from information
+ * 
+ * 
+ * @param[in]      double x - left coordinant of window
+ * @param[in]      double y - bottom coordinant of window
+ * @param[in]      double w - width of window
+ * @param[in]      double h - height of window
+ *****************************************************************************/
 GeneratorView::GeneratorView(double x, double y, double w, double h)
 	: View(x, y, w, h), clear_button("Clear Generator", Fractals::button_x,
 Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
@@ -16,6 +31,12 @@ Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 	leftButton = false;
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Destructor - deletes the linked list
+ *****************************************************************************/
 GeneratorView::~GeneratorView()
 {
 	generator.clear();
@@ -159,6 +180,13 @@ void GeneratorView::mousedrag(double x, double y)
     }
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Draws the background, the drawing grid, and the generator as the user draws
+ * it. after it passes drawing control back to view
+ *****************************************************************************/
 void GeneratorView::draw()
 {
 	const static double grid_spacing = 32.0;
@@ -212,6 +240,13 @@ void GeneratorView::draw()
 		glVertex2d(generator.back().x, generator.back().y);
 		glVertex2d(endx, endy);
 		glEnd();
+	}
+
+
+	//draw instuctions
+	if(generator.size() == 0 )
+	{
+		View::instructions( "Click and drag to draw" );
 	}
 
 	View::draw();

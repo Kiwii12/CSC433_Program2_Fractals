@@ -80,6 +80,13 @@ public:
 	 *		the program window while a button is pressed.
 	 */
 	virtual void mousedrag(double x, double y) = 0;
+
+	/*!
+	 * @brief displays instructions on a tab
+	 *
+	 */
+	void instructions( string instruction );
+
 	
 };
 
