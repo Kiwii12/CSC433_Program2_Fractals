@@ -80,6 +80,6 @@ int main( int argc, char *argv[] )
 	// Initialize program's core class
 	Fractals fractals;
 
-	// Run everything through the Pong class
+	// Run everything through the Fractals class
 	return fractals.run( argc, argv);
 }
