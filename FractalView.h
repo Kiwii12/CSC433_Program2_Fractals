@@ -13,6 +13,7 @@
 class FractalView;
 
 #include <list>
+#include <deque>
 #include <math.h>
 #include "Fractal.h"
 #include "Fractals.h"

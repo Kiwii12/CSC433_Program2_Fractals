@@ -96,11 +96,30 @@ void FractalView::calculate()
 	// ... for calculations
 	generator->back().angle += PI;
 
-	// Time to build fractal
-	for (auto it = fractal.begin(), it2 = it; it != fractal.end(); it=it2)
+	// Set up queue
+	deque<list<Fractal::point>::iterator> queue;
+
+	// Copy fractal into queue
+	for (auto it = fractal.begin(); it != fractal.end(); it++)
 	{
-		it2++;
+		queue.push_back(it);
+	}
+	
+	// Time to build fractal
+	for (int i = 100000000/sizeof(Fractal::point)/(generator->size() - 1);
+		i > 0 && !queue.empty();
+		i--)
+	{
+		auto it = queue.front();
+		queue.pop_front();
 		fractalize(it, fractal, *generator);
+		for (unsigned int i = 1; i < generator->size(); i++, it++)
+		{
+			if (it->distance > 1)
+			{
+				queue.push_back(it);
+			}
+		}
 	}
 
 	generated = true;
@@ -245,39 +264,29 @@ void FractalView::fractalize(
 	double angle = it->angle;
 
 	// Replace line segment with generator
-	auto it2 = it;
 	unsigned int i = 0;
 	for (Fractal::point p : generator)
 	{
 		// Set new distance and angle for old point
-		it2->distance = ((p.distance * distance) / generator.back().distance);
-		it2->angle = (p.angle + angle - generator.back().angle);
+		it->distance = ((p.distance * distance) / generator.back().distance);
+		it->angle = (p.angle + angle - generator.back().angle);
 
 		// Set new point's x and y
-		p.x = it2->x + (it2->distance * cos(it2->angle));
-		p.y = it2->y + (it2->distance * sin(it2->angle));
+		p.x = it->x + (it->distance * cos(it->angle));
+		p.y = it->y + (it->distance * sin(it->angle));
 
 		if (i < generator.size() - 2)
 		{
 			// Insert new point
-			it2++;
-			fractal.insert(it2, p);
-			it2--;
+			it++;
+			fractal.insert(it, p);
+			it--;
 		}
 		else
 		{
 			break;
 		}
 		i++;
-	}
-
-	// Make recursive calls
-	it2 = it;
-	for (i = 0; i < generator.size() - 1; i++)
-	{
-		it2++;
-		fractalize(it, fractal, generator);
-		it = it2;
 	}
 
 	// END
