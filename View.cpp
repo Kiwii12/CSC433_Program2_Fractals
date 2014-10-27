@@ -79,3 +79,43 @@ void View::draw()
 		DrawingManager::draw();
 	}
 }
+
+
+/**************************************************************************//**
+ * @author Johnny Ackerman, Daniel Andrus
+ * 
+ * @par Description:
+ * gives instuction to the user
+ * 
+ * 
+ * @param[in]      string - instruction - the instrunction to display
+ *****************************************************************************/
+void View::instructions( string instruction )
+{	
+	double x = 0;
+	double y = 0;
+	double width = 500;
+	double height = 50;
+
+	//Green Highlight rectangle for text
+	glColor3d(.5,1,.5);
+	glRectd(x, y, width, height);
+
+	// Draw black border
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex2d(x + 0.5, y + 0.5);
+		glVertex2d(x + 0.5, y + height - 0.5);
+		glVertex2d(x + width - 0.5, y + height - 0.5);
+		glVertex2d(x + width - 0.5, y + 0.5);
+	}
+	glEnd();
+
+	// Draw black text
+	glColor3ub(0, 0, 0);
+
+	double padding = (height - 18) / 2 + 2;
+	glRasterPos2d(x + padding, y + padding);
+	glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char *) instruction.c_str() );
+}

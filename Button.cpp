@@ -1,21 +1,65 @@
+/*******************************************************************************
+ *                 DECLARATIONS, INCLUDES, AND NAMESPACES
+*******************************************************************************/
 #include "Button.h"
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Constructor - initilizes data, and creates a window from information
+ * 
+ * 
+ * @param[in]	   string 1 - name of this button
+ * @param[in]      double x - left coordinant of window
+ * @param[in]      double y - bottom coordinant of window
+ * @param[in]      double w - width of window
+ * @param[in]      double h - height of window
+ *****************************************************************************/
 Button::Button(string l, double x, double y, double w, double h)
 : label(l), x(x), y(y), width(w), height(h), hover(false), pressed(false)
 {
 	
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Destructor - exists
+ *****************************************************************************/
 Button::~Button()
 {
 	
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * binds a function to the button
+ * 
+ * 
+ * @param[in]      function<void()> action - function that button performs
+ *****************************************************************************/
 void Button::setAction(function<void()> action)
 {
 	this->callback = action;
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * performs action when clicked on, only when clicked on
+ *
+ *
+ *
+ * @param[in]      int button - mouse button pressed
+ * @param[in]      int state - mouse button pressed or released
+ * @param[in]      double x - x coordinant of click
+ * @param[in]      double y - y coordinant of click
+ *****************************************************************************/
 void Button::mouseclick(int button, int state, double x, double y)
 {
 	// Cancel if it's not a left-click, since we don't care about those
@@ -58,6 +102,17 @@ void Button::mouseclick(int button, int state, double x, double y)
 	}
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * highlights buttons that the mouse is over
+ *
+ *
+ *
+ * @param[in]      double x - x coordinant of mouse
+ * @param[in]      double y - y coordinant of mouse
+ *****************************************************************************/
 void Button::mousemove(double x, double y)
 {
 	// Detect if click occured over us
@@ -73,6 +128,17 @@ void Button::mousemove(double x, double y)
 	}
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * passes mouse drag to mouse move
+ *
+ *
+ *
+ * @param[in]      double x - x coordinant of mouse
+ * @param[in]      double y - y coordinant of mouse
+ *****************************************************************************/
 void Button::mousedrag(double x, double y)
 {
 	if (pressed)
@@ -81,6 +147,12 @@ void Button::mousedrag(double x, double y)
 	}
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Draws the button and highlights it when hovered on by mouse
+ *****************************************************************************/
 void Button::draw()
 {
 	if (hover)

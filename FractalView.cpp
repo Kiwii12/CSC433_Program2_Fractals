@@ -1,3 +1,6 @@
+/*******************************************************************************
+ *                 DECLARATIONS, INCLUDES, AND NAMESPACES
+*******************************************************************************/
 #include "FractalView.h"
 
 /**************************************************************************//**
@@ -177,9 +180,22 @@ void FractalView::mousedrag(double x, double y)
 	build_button.mousedrag(x, y);
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Draws the background, the drawing grid, and the fractal. after it passes
+ * drawing control back to view
+ *****************************************************************************/
 void FractalView::draw()
 {
 	const static double grid_spacing = 32.0;
+
+	//shortcut points - used for instuction check
+	list<Fractal::point>* initiator = 
+				&(Fractals::getInstance() -> initiatorView -> initiator);
+	list<Fractal::point>* generator =
+				&(Fractals::getInstance() -> generatorView -> generator);
 
 	// Draw background
 	glColor3ub(255, 255, 255);
@@ -220,9 +236,30 @@ void FractalView::draw()
 		glEnd();
 	}
 
+	//draws instuctions
+	if( initiator->size() == 0 && generator->size() == 0 )
+	{
+		View::instructions( "Press initiator or generator to begin" );
+	}
+	else if( fractal.size() == 0 )
+	{
+		View::instructions( "Build Fractal to see your creation" );
+	}
+
+
 	View::draw();
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * binds a function to the button
+ * 
+ * 
+ * @param[in]      list<Fractal::points>* points - passes a list to
+ * complete by calculating its theta value and distance to next point
+ *****************************************************************************/
 void FractalView::completePoints(list<Fractal::point>* points)
 {
 	// Loop through every point in list
@@ -249,6 +286,19 @@ void FractalView::completePoints(list<Fractal::point>* points)
 	}
 }
 
+
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * passes mouse movement info to the build button(instance of button class
+ *
+ *
+ *
+ * @param[in]      list<Fractal::point>::iterator it - initiator list
+ * @param[in]      list<Fractal::point>::iterator fractalize - fractal list
+ * @param[in]      list<Fractal::point>::iterator generator - generator list
+ *****************************************************************************/
 void FractalView::fractalize(
 		list<Fractal::point>::iterator it,
 		list<Fractal::point> &fractal,
