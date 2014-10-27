@@ -21,6 +21,20 @@ GeneratorView::~GeneratorView()
 	generator.clear();
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * relays mouse clicks to the button class and allows the user to make the
+ * generator
+ *
+ *
+ *
+ * @param[in]      int button - mouse button pressed
+ * @param[in]      int state - mouse button pressed or released
+ * @param[in]      double x - x coordinant of click
+ * @param[in]      double y - y coordinant of click
+ *****************************************************************************/
 void GeneratorView::mouseclick(int button, int state, double x, double y)
 {
 	clear_button.mouseclick(button, state, x, y);
@@ -100,11 +114,33 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
     }
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * passes mouse movement info to the build button(instance of button class
+ *
+ *
+ *
+ * @param[in]      double x - x coordinant of mouse
+ * @param[in]      double y - y coordinant of mouse
+ *****************************************************************************/
 void GeneratorView::mousemove(double x, double y)
 {
 	clear_button.mousemove(x, y);
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * passes mouse drag info to the build button(instance of button class
+ *
+ *
+ *
+ * @param[in]      double x - x coordinant of mouse
+ * @param[in]      double y - y coordinant of mouse
+ *****************************************************************************/
 void GeneratorView::mousedrag(double x, double y)
 {
 	if (generator.size() > 0 && leftButton) //left Mouse Button

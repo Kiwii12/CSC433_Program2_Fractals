@@ -1,5 +1,17 @@
 #include "FractalView.h"
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Constructor - initilizes data, and creates a window from information
+ * 
+ * 
+ * @param[in]      double x - left coordinant of window
+ * @param[in]      double y - bottom coordinant of window
+ * @param[in]      double w - width of window
+ * @param[in]      double h - height of window
+ *****************************************************************************/
 FractalView::FractalView(double x, double y, double w, double h)
 : View(x, y, w, h), build_button("Build Fractal", Fractals::button_x,
 Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
@@ -15,11 +27,24 @@ Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 	generror = 0;
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Destructor - deletes the linked list
+ *****************************************************************************/
 FractalView::~FractalView()
 {
 	fractal.clear();
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * calculates values for initiator and generator and then uses those values
+ *		to create the fractal list
+ *****************************************************************************/
 void FractalView::calculate()
 {
 	// Reset variables
@@ -83,16 +108,51 @@ void FractalView::calculate()
 	generror = 0;
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * relays mouse clicks to the button class
+ *
+ *
+ *
+ * @param[in]      int button - mouse button pressed
+ * @param[in]      int state - mouse button pressed or released
+ * @param[in]      double x - x coordinant of click
+ * @param[in]      double y - y coordinant of click
+ *****************************************************************************/
 void FractalView::mouseclick(int button, int state, double x, double y)
 {
 	build_button.mouseclick(button, state, x, y);
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * passes mouse movement info to the build button(instance of button class
+ *
+ *
+ *
+ * @param[in]      double x - x coordinant of mouse
+ * @param[in]      double y - y coordinant of mouse
+ *****************************************************************************/
 void FractalView::mousemove(double x, double y)
 {
 	build_button.mousemove(x, y);
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * passes mouse movement info to the build button(instance of button class
+ *
+ *
+ *
+ * @param[in]      double x - x coordinant of mouse
+ * @param[in]      double y - y coordinant of mouse
+ *****************************************************************************/
 void FractalView::mousedrag(double x, double y)
 {
 	build_button.mousedrag(x, y);
