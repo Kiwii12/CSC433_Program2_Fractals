@@ -43,7 +43,7 @@ public:
 	/*!
 	 * @brief Class destructor
 	 */
-	~ViewManager();
+	virtual ~ViewManager();
 	
 	/*!
 	 * @brief Registers a view

@@ -30,6 +30,8 @@ protected:
 	map<int, list<Drawable*>> drawables;	/*!< list of objects to draw*/
 
 public:
+	virtual ~DrawingManager();
+
 	/*!
 	 * @brief Registers a Drawable object to be drawn on demand.
 	 */
