@@ -19,6 +19,10 @@ class GeneratorView;
 #include "View.h"
 #include "Button.h"
 
+/***************************************************************************//**
+ * @brief The GeneratorView class is a subclass of view, it deals with
+ *		drawing the Generator
+*******************************************************************************/
 class GeneratorView: public View
 {
 private:

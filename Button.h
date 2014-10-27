@@ -14,11 +14,6 @@ class Button;
 
 #include <string>
 #include <functional>
-/***************************************************************************//**
- * @file File containing the declaration for the Button class.
- *
- * @brief Contains the declaration for the Butoon class.
-*******************************************************************************/
 #include "Drawable.h"
 
 

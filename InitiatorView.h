@@ -18,6 +18,10 @@ class InitiatorView;
 #include "View.h"
 #include "Button.h"
 
+/***************************************************************************//**
+ * @brief The InitiatorView class is a subclass of view, it deals with
+ *		drawing the initiator
+*******************************************************************************/
 class InitiatorView: public View
 {
 private:

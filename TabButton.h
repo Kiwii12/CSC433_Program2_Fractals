@@ -16,13 +16,28 @@ class TabButton;
 
 using namespace std;
 
+/***************************************************************************//**
+ * @brief The TabButton Class is a subclass of button, It deals with buttons 
+ *		that switch which view class is active
+*******************************************************************************/
 class TabButton : public Button
 {
 public:
-	bool active;
+	bool active; /*!< if the mouse is over the button */
 
+	/**
+	* @brief The Constructor, sets private data from Button
+	*/
 	TabButton(string l, double x, double y, double w, double h);
+
+	/**
+	* @brief The Destructor, exsists
+	*/
 	~TabButton();
+
+	/**
+	* @brief The Draws and highlights the button
+	*/
 	void draw();
 };
 

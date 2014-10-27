@@ -1,15 +1,15 @@
-/***************************************************************************//**
+/***************************************************************************//*
  * @file File containing the declaration for the Fractal class.
  *
  * @brief Contains the declaration for the Fractal class, the class that
  *      generates a fractal from an initiator and a generator.
-*******************************************************************************/
+******************************************************************************/
 #ifndef _FRACTAL_H_
 #define _FRACTAL_H_
 
-/*******************************************************************************
+/******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
-*******************************************************************************/
+******************************************************************************/
 class Fractal;
 
 #include<list>
@@ -17,13 +17,12 @@ class Fractal;
 
 using namespace std;
 
-/***************************************************************************//**
- * @brief The Fractal class is responsible for generating a fractal using an
- *      initiator and a generator.
+/***************************************************************************//*
+ * @brief The Fractal class creates stuctures holding the points for
+ *		initiator, generator, and fractal.
  *
- * @details This class takes in an initiator and a generator and builds a
- *      fractal.
-*******************************************************************************/
+ * @details This class hold in an initiator, generator and a fractal.
+******************************************************************************/
 class Fractal : public Drawable
 {
 public:
@@ -56,11 +55,6 @@ public:
 	void setInitiatorDirection(bool direction);
 	
 	/*!
-	* @brief Generates a fractal using the loaded initiator and generator
-	*/
-	void generateFractal();
-	
-	/*!
 	* @brief Clears all points from the initiator
 	*/
 	void clearInitiator();
@@ -74,11 +68,6 @@ public:
 	* @brief Clears all points from the generated fractal
 	*/
 	void clearFractal();
-	
-	/*!
-	* @brief Draws the generated fractal
-	*/
-	void draw();
 	
 private:
 	bool initiator_direction;	/*!< Direction initiator goes */

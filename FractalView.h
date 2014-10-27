@@ -23,6 +23,10 @@ class FractalView;
 #define PI	3.14159265
 #endif
 
+/***************************************************************************//**
+ * @brief The FractalView class is a subclass of view, it deals with
+ *		calculating and drawing the Fractal
+*******************************************************************************/
 class FractalView : public View
 {
 private:
