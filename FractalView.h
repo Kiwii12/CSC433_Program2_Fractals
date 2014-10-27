@@ -36,6 +36,7 @@ private:
 	int generror;		/*!< throws an exception to help with error checking */
 	Button build_button;	/*!< instance of button class for the user to 
 							tell when to start building the fractal */
+	Button* close_button;
 
 	/**
 	* @brief Fills in the distance and theta values in a linked list
@@ -50,6 +51,8 @@ private:
 		list<Fractal::point>::iterator it,
 		list<Fractal::point> &fractal,
 		const list<Fractal::point> &generator);
+
+	void createCloseButton();
 
 public:
 	list<Fractal::point> fractal; /*!< Linked list to hold the fractal */
@@ -70,6 +73,8 @@ public:
 	*		in the fractal
 	*/
 	void calculate();
+
+	void closeErrorMessage();
 
 	/**
 	* @brief callback, handles mouseclick events, only used on button

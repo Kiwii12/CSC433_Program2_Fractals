@@ -25,6 +25,7 @@ Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 	generated = false;
 	generating = false;
 	generror = 0;
+	close_button = NULL;
 }
 
 /**************************************************************************//**
@@ -63,6 +64,7 @@ void FractalView::calculate()
 	{
 		generror = (initiator->size() < 3 ? 1 : 2);
 		generating = false;
+		createCloseButton();
 		return;
 	}
 
@@ -82,6 +84,7 @@ void FractalView::calculate()
 			// Cancel generation and leave an error code
 			generating = false;
 			generror = 3;
+			createCloseButton();
 			return;
 		}
 	}
@@ -105,10 +108,9 @@ void FractalView::calculate()
 		queue.push_back(it);
 	}
 	
-	// Time to build fractal
-	for (int i = 100000000/sizeof(Fractal::point)/(generator->size() - 1);
-		i > 0 && !queue.empty();
-		i--)
+	// Time to build fractal, limit size to 10 MB
+	i = 10000000/sizeof(Fractal::point)/(generator->size() - 1);
+	while (!queue.empty() && --i > 0)
 	{
 		auto it = queue.front();
 		queue.pop_front();
@@ -121,10 +123,30 @@ void FractalView::calculate()
 			}
 		}
 	}
+	if (i <= 0)
+	{
+		generated = true;
+		generating = false;
+		generror = 4;
+		createCloseButton();
+		return;
+	}
 
 	generated = true;
 	generating = false;
 	generror = 0;
+}
+
+void FractalView::closeErrorMessage()
+{
+	if (close_button != NULL)
+	{
+		DrawingManager::stopDrawingObject(close_button);
+		delete close_button;
+	}
+	close_button = NULL;
+	generror = 0;
+	glutPostRedisplay();
 }
 
 /**************************************************************************//**
@@ -143,6 +165,10 @@ void FractalView::calculate()
 void FractalView::mouseclick(int button, int state, double x, double y)
 {
 	build_button.mouseclick(button, state, x, y);
+	if (close_button != NULL)
+	{
+		close_button->mouseclick(button, state, x, y);
+	}
 }
 
 /**************************************************************************//**
@@ -159,6 +185,10 @@ void FractalView::mouseclick(int button, int state, double x, double y)
 void FractalView::mousemove(double x, double y)
 {
 	build_button.mousemove(x, y);
+	if (close_button != NULL)
+	{
+		close_button->mousemove(x, y);
+	}
 }
 
 /**************************************************************************//**
@@ -175,6 +205,10 @@ void FractalView::mousemove(double x, double y)
 void FractalView::mousedrag(double x, double y)
 {
 	build_button.mousedrag(x, y);
+	if (close_button != NULL)
+	{
+		close_button->mousedrag(x, y);
+	}
 }
 
 void FractalView::draw()
@@ -220,7 +254,53 @@ void FractalView::draw()
 		glEnd();
 	}
 
+	if (generror != 0)
+	{
+		// Draw white background
+		glColor3ub(255, 255, 255);
+		glRectd(x + width/2 - 230, y + height/2 - 60,
+			x + width/2 + 230, y + height/2 + 60);
+		
+		// Draw black border. Using GL_LINE_STRIPE because loop is broken
+		glColor3ub(0, 0, 0);
+		glBegin(GL_LINE_LOOP);
+		{
+			glVertex2d(x + width/2 - 230.5, y + height/2 - 60.5);
+			glVertex2d(x + width/2 - 230.5, y + height/2 + 60.5);
+			glVertex2d(x + width/2 + 230.5, y + height/2 + 60.5);
+			glVertex2d(x + width/2 + 230.5, y + height/2 - 60.5);
+		}
+		glEnd();
+
+		glRasterPos2d(x + width/2 - 200, y + height/2 + 30);
+
+		switch (generror)
+		{
+		case 1:
+			glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char*)
+				"Error: Initiator must have at least 3 points!" );
+			break;
+		case 2:
+			glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char*)
+				"Error: Generator must have at least 3 points!" );
+			break;
+		case 3:
+			glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char*)
+				"Error: All lines in initiator must be shorter than\n"
+				" the distance between the end points!" );
+			break;
+		case 4:
+			glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char*)
+				"Error: Space limit reached!" );
+			break;
+		case 0:
+		default:
+			break;
+		}
+	}
+	
 	View::draw();
+
 }
 
 void FractalView::completePoints(list<Fractal::point>* points)
@@ -290,4 +370,16 @@ void FractalView::fractalize(
 	}
 
 	// END
+}
+
+void FractalView::createCloseButton()
+{
+	if (close_button == NULL)
+	{
+		close_button = new Button("OK", x + width/2 - 50, y + height/2 - 40, 100, 24);
+		close_button->setAction([](){
+			Fractals::getInstance()->fractalView->closeErrorMessage();
+		});
+		DrawingManager::drawObject(close_button);
+	}
 }

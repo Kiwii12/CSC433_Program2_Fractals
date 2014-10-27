@@ -102,7 +102,7 @@ void Button::draw()
 		glColor3ub(255, 255, 255);
 	}
 	
-	glRecti((int) x, (int) y, (int) (x + width), (int) (y + height));
+	glRectd(x, y, x + width, y + height);
 
 	// Draw black border
 	glColor3ub(0, 0, 0);
@@ -116,8 +116,6 @@ void Button::draw()
 	glEnd();
 
 	// Draw black text
-	glColor3ub(0, 0, 0);
-
 	double padding = (height - 18) / 2 + 2;
 	glRasterPos2d(x + padding, y + padding);
 	glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char *) label.c_str() );
