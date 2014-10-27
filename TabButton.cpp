@@ -1,16 +1,41 @@
 #include "TabButton.h"
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * constuctor, creates a button and given coordinants of given length
+ * 
+ * 
+ * @param[in]      string 1 - name of the button
+ * @param[in]	   double x - left coordinant of the button
+ * @param[in]	   double y - bottom coordinant of the button
+ * @param[in]	   double w - width of button
+ * @param[in]	   double h - height of button
+ *****************************************************************************/
 TabButton::TabButton(string l, double x, double y, double w, double h)
 : Button(l, x, y, w, h), active(false)
 {
 
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * destructor - destructor, exists
+ *****************************************************************************/
 TabButton::~TabButton()
 {
 
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * destructor - draws and highlights the function
+ *****************************************************************************/
 void TabButton::draw()
 {
 	// Back up status

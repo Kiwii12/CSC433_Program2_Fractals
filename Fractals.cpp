@@ -20,6 +20,12 @@ const double Fractals::button_y = vview_y * 2 + vview_h;
 /*******************************************************************************
  *                          FUNCTION DEFINITIONS
 *******************************************************************************/
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description: Constructor, initializes data, registers data with other
+ *	classes, and creates instances of subClasses
+*******************************************************************************/
 Fractals::Fractals()
 : view_x(0), view_y(0), view_width(vview_w + 32),
 view_height(vview_h + button_h + vview_y * 3),
@@ -91,6 +97,11 @@ window_name("Fractals")
 	}
 }
 
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description: Destructor, destroys subclasses
+*******************************************************************************/
 Fractals::~Fractals()
 {
 	delete initiatorView;
@@ -202,6 +213,11 @@ double Fractals::getViewHeight()
 	return view_height;
 }
 
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description: Draws the background and the fractal
+*******************************************************************************/
 void Fractals::draw()
 {
 
