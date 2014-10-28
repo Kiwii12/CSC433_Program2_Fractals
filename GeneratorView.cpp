@@ -118,7 +118,7 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
             break;
 
         case 2:				// Mouse right button
-			if (state == 0) // pressed
+			if (state == 0 && !leftButton) // pressed
 			{
 				// Delete last point
 				if (generator.size() == 2)

@@ -315,7 +315,7 @@ void FractalView::draw()
 			break;
 		case 3:
 			glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char*)
-				"Error: All lines in initiator must be shorter than\n"
+				"Error: All lines in generator must be shorter than\n"
 				" the distance between the end points!" );
 			break;
 		case 4:
