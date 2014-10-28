@@ -7,7 +7,7 @@ all: $(EXECS)
 
 fractals: Main.o Fractals.o DrawingManager.o View.o Fractal.o ViewManager.o\
           FractalView.o GeneratorView.o InitiatorView.o Button.o TabButton.o
-	$(CXX) $(CXXFLAGS) -o $@ $? $(CXXLIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(CXXLIBS)
 
 %.o: %.c
 	$(CXX) $(CXXFLAGS) $@ -c $<

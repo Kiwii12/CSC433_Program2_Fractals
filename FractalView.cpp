@@ -111,8 +111,8 @@ void FractalView::calculate()
 		queue.push_back(it);
 	}
 	
-	// Time to build fractal, limit size to 10 MB
-	i = 10000000/sizeof(Fractal::point)/(generator->size() - 1);
+	// Time to build fractal, limit size to 1 GB
+	i = 500000000/sizeof(Fractal::point)/(generator->size() - 1);
 	while (!queue.empty() && --i > 0)
 	{
 		auto it = queue.front();
@@ -262,11 +262,12 @@ void FractalView::draw()
 	if (generated && !generating)
 	{
 		glColor3ub(0, 0, 0);
-		glBegin(GL_LINE_LOOP);
+		glBegin(GL_LINE_STRIP);
 		for (auto p : fractal)
 		{
 			glVertex2d(p.x, p.y);
 		}
+		glVertex2d(fractal.front().x, fractal.front().y);
 		glEnd();
 	}
 

@@ -89,8 +89,7 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
                 endx = x;
                 endy = y;
 
-				draw();
-				glFlush();
+				glutPostRedisplay();
             }
 
             else if ( state == 1 && leftButton)	// release - new endpoint
@@ -109,8 +108,7 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
 				generator.push_back(p);
 
                 // force redraw
-				draw();
-				glFlush();
+				glutPostRedisplay();
             }
 
             break;
@@ -128,6 +126,7 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
 					generator.pop_back();
 				}
 			}
+			glutPostRedisplay();
 			break;
 
 		default:
