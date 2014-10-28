@@ -26,8 +26,8 @@
  *****************************************************************************/
 FractalView::FractalView(double x, double y, double w, double h)
 : View(x, y, w, h), generated(false), generating(false), generror(0),
-close_button(NULL), build_button("Build Fractal", Fractals::button_x,
-			Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
+build_button("Build Fractal", Fractals::button_x, Fractals::button_y,
+Fractals::button_w * 2, Fractals::button_h), close_button(NULL)
 {
 	// Initialize button with its action
 	build_button.setAction([](){
