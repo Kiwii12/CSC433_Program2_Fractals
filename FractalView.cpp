@@ -111,7 +111,7 @@ void FractalView::calculate()
 		queue.push_back(it);
 	}
 	
-	// Time to build fractal, limit size to 1 GB
+	// Time to build fractal, limit size to 0.5 GB
 	i = 500000000/sizeof(Fractal::point)/(generator->size() - 1);
 	while (!queue.empty() && --i > 0)
 	{
