@@ -45,16 +45,16 @@ private:
 	/**
 	* @brief Fills in the distance and theta values in a linked list
 	*/
-	void completePoints(list<Fractals::point>* points);
+	void completePoints(list<point>* points);
 
 	/**
 	* @brief with the distance and theta value it creates a fractal
 	*		from the initiator and generator
 	*/
 	void fractalize(
-		list<Fractals::point>::iterator it,
-		list<Fractals::point> &fractal,
-		const list<Fractals::point> &generator);
+		list<point>::iterator it,
+		list<point> &fractal,
+		const list<point> &generator);
 
 	/**
 	* @brief gives close button function to close errors
@@ -62,7 +62,7 @@ private:
 	void createCloseButton();
 
 public:
-	list<Fractals::point> fractal; /*!< Linked list to hold the fractal */
+	list<point> fractal; /*!< Linked list to hold the fractal */
 	
 	/**
 	* @brief The Constructor, sets private data, 

@@ -26,8 +26,8 @@
  *****************************************************************************/
 FractalView::FractalView(double x, double y, double w, double h)
 : View(x, y, w, h), generated(false), generating(false), generror(0),
-build_button("Build Fractal", Fractals::button_x, Fractals::button_y,
-			 Fractals::button_w * 2, Fractals::button_h)
+close_button(NULL), build_button("Build Fractal", Fractals::button_x,
+			Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
 {
 	// Initialize button with its action
 	build_button.setAction([](){
@@ -63,9 +63,9 @@ void FractalView::calculate()
 	generror = 0;
 
 	// Get shortcut pointers to initiator and generator
-	list<Fractals::point>* initiator = 
+	list<point>* initiator = 
 				&(Fractals::getInstance() -> initiatorView -> initiator);
-	list<Fractals::point>* generator =
+	list<point>* generator =
 				&(Fractals::getInstance() -> generatorView -> generator);
 
 	// Make sure both have minimum number of points
@@ -109,7 +109,7 @@ void FractalView::calculate()
 	generator->back().angle += PI;
 
 	// Set up queue
-	deque<list<Fractals::point>::iterator> queue;
+	deque<list<point>::iterator> queue;
 
 	// Copy fractal into queue
 	for (auto it = fractal.begin(); it != fractal.end(); it++)
@@ -118,7 +118,7 @@ void FractalView::calculate()
 	}
 	
 	// Time to build fractal, limit size to 0.5 GB
-	i = 500000000/sizeof(Fractals::point)/(generator->size() - 1);
+	i = 500000000/sizeof(point)/(generator->size() - 1);
 	while (!queue.empty() && --i > 0)
 	{
 		auto it = queue.front();
@@ -234,9 +234,9 @@ void FractalView::draw()
 	const static double grid_spacing = 32.0;
 
 	//shortcut points - used for instuction check
-	list<Fractals::point>* initiator = 
+	list<point>* initiator = 
 				&(Fractals::getInstance() -> initiatorView -> initiator);
-	list<Fractals::point>* generator =
+	list<point>* generator =
 				&(Fractals::getInstance() -> generatorView -> generator);
 
 	// Draw background
@@ -352,7 +352,7 @@ void FractalView::draw()
  * @param[in]      points - passes a list to complete by calculating the angle
  * and distance to next point
  *****************************************************************************/
-void FractalView::completePoints(list<Fractals::point>* points)
+void FractalView::completePoints(list<point>* points)
 {
 	// Loop through every point in list
 	auto it1 = points->begin();
@@ -383,7 +383,7 @@ void FractalView::completePoints(list<Fractals::point>* points)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * Replaces a line segment in fractal with segments from generator. Relies on
+ * Replaces a line segment in fractal with segments from generator-> Relies on
  * accurate angle and distance values.
  *
  * @param[in]      it - initiator to point to modify in fractal list
@@ -391,9 +391,9 @@ void FractalView::completePoints(list<Fractals::point>* points)
  * @param[in]      generator - generator list
  *****************************************************************************/
 void FractalView::fractalize(
-		list<Fractals::point>::iterator it,
-		list<Fractals::point> &fractal,
-		const list<Fractals::point> &generator)
+		list<point>::iterator it,
+		list<point> &fractal,
+		const list<point> &generator)
 {
 	// Base case
 	if (it->distance <= 1)
@@ -406,7 +406,7 @@ void FractalView::fractalize(
 
 	// Replace line segment with generator
 	unsigned int i = 0;
-	for (Fractals::point p : generator)
+	for (point p : generator)
 	{
 		// Set new distance and angle for old point
 		it->distance = ((p.distance * distance) / generator.back().distance);

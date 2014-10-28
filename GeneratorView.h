@@ -37,7 +37,7 @@ private:
 						 to clear the linked list */
 	
 public:
-	list<Fractals::point> generator;
+	list<point> generator;
 	
 	/**
 	* @brief The Constructor, sets private data, 

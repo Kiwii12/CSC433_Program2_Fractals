@@ -66,7 +66,7 @@ void InitiatorView::mouseclick(int button, int state, double x, double y)
 {
 	clear_button.mouseclick(button, state, x, y);
 
-	Fractals::point p;
+	point p;
 	
 	// Cancel if point is outside view
 	if (state == 0

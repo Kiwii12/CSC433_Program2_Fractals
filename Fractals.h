@@ -16,6 +16,17 @@
 *******************************************************************************/
 class Fractals;
 
+/**
+ * @brief Struct to contain point data for initiator, generator, and fractal
+ */
+struct point
+{
+	double x;			/*!< X position of the point */
+	double y;			/*!< Y position of the point */
+	double angle;		/*!< Angle from current point to next point */
+	double distance;	/*!< Distance from current point to next point */
+};
+
 #include <iostream>
 #include <string>
 #include <GL/freeglut.h>
@@ -52,17 +63,7 @@ private:
 	int window_height;			/*!< Height of gui window */
 	string window_name;			/*!< Name of the gui window */
 
-public:/**
-	* @brief Struct to contain point data for initiator, generator, and fractal
-	*/
-	struct point
-	{
-		double x;			/*!< X position of the point */
-		double y;			/*!< Y position of the point */
-		double angle;		/*!< Angle from current point to next point */
-		double distance;	/*!< Distance from current point to next point */
-	};
-	
+public:
 	static const double vview_x;	/*!< left side coordinate of draw area */
 	static const double vview_y;	/*!< bottom coordinate of draw area */
 	static const double vview_w;	/*!< Width of draw window */

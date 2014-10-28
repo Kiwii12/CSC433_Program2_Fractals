@@ -17,8 +17,8 @@
 class InitiatorView;
 
 #include <list>
-#include "Fractals.h"
 #include "View.h"
+#include "Fractals.h"
 #include "Button.h"
 /***************************************************************************//**
  * @author Daniel Andrus, Johnny Ackerman
@@ -45,7 +45,7 @@ private:
 						 to clear the linked list */
 
 public:
-	list<Fractals::point> initiator; /*!< holds the points that 
+	list<point> initiator; /*!< holds the points that 
 									make up the initiator */
 	/**
 	* @brief The Constructor, sets private data, 
