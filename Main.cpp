@@ -23,12 +23,19 @@
  * @details This is a fractal drawing program designed to allow a user to
  * generate complex fractals using a simple graphical interface.
  *
+ *
+ * Extras  Has Tabs and many useful buttons. Displays Errors for user. 
+ *	Has a drawing grid to help the user draw. Has user friendly
+ *  instructions. Limited memory usage to half a "gigabyte" so more
+ *	complex fractals can be draw without limiting the itterations of
+ *	simpler fractals
+ *
  * GLUT and OpenGL are the libraries used for gui management.
  *
  * @section compile_section Compiling and Usage
  *
  * @par Compiling Instructions: 
- *      Build and run
+ *      Build and Run
  * 
  * @par Build:
    @verbatim
@@ -46,6 +53,12 @@
    @endverbatim 
  *
  * @section todo_bugs_modification_section Todo, Bugs, and Modifications
+ *
+ * @Bugs	-	Runs Slowly on weak computers for complex fractals
+ *
+ * @todo	-	Add parallel programing so program never stops during
+ *					Fractalization
+ *
  * 
  * @par Modifications and Development Timeline: 
    @verbatim 
