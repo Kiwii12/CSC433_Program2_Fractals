@@ -17,7 +17,6 @@
 class GeneratorView;
 
 #include <list>
-#include "Fractal.h"
 #include "Fractals.h"
 #include "View.h"
 #include "Button.h"
@@ -38,7 +37,7 @@ private:
 						 to clear the linked list */
 	
 public:
-	list<Fractal::point> generator;
+	list<Fractals::point> generator;
 	
 	/**
 	* @brief The Constructor, sets private data, 

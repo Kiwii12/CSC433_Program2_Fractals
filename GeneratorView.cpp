@@ -18,26 +18,23 @@
  * @par Description:
  * Constructor - initilizes data, and creates a window from information
  * 
- * 
- * @param[in]      double x - left coordinant of window
- * @param[in]      double y - bottom coordinant of window
- * @param[in]      double w - width of window
- * @param[in]      double h - height of window
+ * @param[in]      x - left coordinate of window
+ * @param[in]      y - bottom coordinate of window
+ * @param[in]      w - width of window
+ * @param[in]      h - height of window
  *****************************************************************************/
 GeneratorView::GeneratorView(double x, double y, double w, double h)
-	: View(x, y, w, h), clear_button("Clear Generator", Fractals::button_x,
-Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
+	: View(x, y, w, h), endx(0), endy(0), leftButton(false),
+clear_button("Clear Generator", Fractals::button_x, Fractals::button_y,
+			 Fractals::button_w * 2, Fractals::button_h)
 {
+	// Initialize button with its action
 	clear_button.setAction([](){
 		Fractals::getInstance()->generatorView->generator.clear();
 		Fractals::getInstance()->generatorView->draw();
 		glFlush();
 	});
 	drawObject(&clear_button);
-
-	endx = 0;
-	endy = 0;
-	leftButton = false;
 }
 
 /**************************************************************************//**
@@ -58,18 +55,16 @@ GeneratorView::~GeneratorView()
  * relays mouse clicks to the button class and allows the user to make the
  * generator
  *
- *
- *
- * @param[in]      int button - mouse button pressed
- * @param[in]      int state - mouse button pressed or released
- * @param[in]      double x - x coordinant of click
- * @param[in]      double y - y coordinant of click
+ * @param[in]      button - mouse button pressed
+ * @param[in]      state - mouse button pressed or released
+ * @param[in]      x - x coordinate of click
+ * @param[in]      y - y coordinate of click
  *****************************************************************************/
 void GeneratorView::mouseclick(int button, int state, double x, double y)
 {
 	clear_button.mouseclick(button, state, x, y);
 
-	Fractal::point p;
+	Fractals::point p;
 	
 	// Cancel if point is outside view
 	if (state == 0
@@ -149,10 +144,8 @@ void GeneratorView::mouseclick(int button, int state, double x, double y)
  * @par Description:
  * passes mouse movement info to the build button(instance of button class
  *
- *
- *
- * @param[in]      double x - x coordinant of mouse
- * @param[in]      double y - y coordinant of mouse
+ * @param[in]      x - x coordinate of mouse
+ * @param[in]      y - y coordinate of mouse
  *****************************************************************************/
 void GeneratorView::mousemove(double x, double y)
 {
@@ -165,10 +158,8 @@ void GeneratorView::mousemove(double x, double y)
  * @par Description:
  * passes mouse drag info to the build button(instance of button class
  *
- *
- *
- * @param[in]      double x - x coordinant of mouse
- * @param[in]      double y - y coordinant of mouse
+ * @param[in]      x - x coordinate of mouse
+ * @param[in]      y - y coordinate of mouse
  *****************************************************************************/
 void GeneratorView::mousedrag(double x, double y)
 {
@@ -217,6 +208,8 @@ void GeneratorView::draw()
 		glVertex2d(x + width, y + i - 0.5);
 	}
 	glEnd();
+	
+	// Draw border
 	glBegin(GL_LINE_LOOP);
 	{
 		glVertex2d(x + 0.5, y + 0.5);

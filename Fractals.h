@@ -52,13 +52,23 @@ private:
 	int window_height;			/*!< Height of gui window */
 	string window_name;			/*!< Name of the gui window */
 
-public:
-	static const double vview_x;	/*!< left side coordinant of draw area */
-	static const double vview_y;	/*!< bottom coordinant of draw area */
+public:/**
+	* @brief Struct to contain point data for initiator, generator, and fractal
+	*/
+	struct point
+	{
+		double x;			/*!< X position of the point */
+		double y;			/*!< Y position of the point */
+		double angle;		/*!< Angle from current point to next point */
+		double distance;	/*!< Distance from current point to next point */
+	};
+	
+	static const double vview_x;	/*!< left side coordinate of draw area */
+	static const double vview_y;	/*!< bottom coordinate of draw area */
 	static const double vview_w;	/*!< Width of draw window */
 	static const double vview_h;	/*!< height of draw window */
-	static const double button_x;	/*!< left coordinant of button */
-	static const double button_y;	/*!< right coordinant of button */
+	static const double button_x;	/*!< left coordinate of button */
+	static const double button_y;	/*!< right coordinate of button */
 	static const double button_w;	/*!< width of button */
 	static const double button_h;	/*!< height of button */
 	
@@ -82,7 +92,6 @@ public:
 	* @brief Function to get the current instance of the program.
 	*/
 	int run( int argc, char *argv[] );
-
 
 	/*!
 	* @brief Function to get the current instance of the program.

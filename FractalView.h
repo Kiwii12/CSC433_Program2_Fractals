@@ -19,7 +19,6 @@ class FractalView;
 #include <list>
 #include <deque>
 #include <math.h>
-#include "Fractal.h"
 #include "Fractals.h"
 #include "View.h"
 #include "Button.h"
@@ -46,16 +45,16 @@ private:
 	/**
 	* @brief Fills in the distance and theta values in a linked list
 	*/
-	void completePoints(list<Fractal::point>* points);
+	void completePoints(list<Fractals::point>* points);
 
 	/**
 	* @brief with the distance and theta value it creates a fractal
 	*		from the initiator and generator
 	*/
 	void fractalize(
-		list<Fractal::point>::iterator it,
-		list<Fractal::point> &fractal,
-		const list<Fractal::point> &generator);
+		list<Fractals::point>::iterator it,
+		list<Fractals::point> &fractal,
+		const list<Fractals::point> &generator);
 
 	/**
 	* @brief gives close button function to close errors
@@ -63,7 +62,7 @@ private:
 	void createCloseButton();
 
 public:
-	list<Fractal::point> fractal; /*!< Linked list to hold the fractal */
+	list<Fractals::point> fractal; /*!< Linked list to hold the fractal */
 	
 	/**
 	* @brief The Constructor, sets private data, 

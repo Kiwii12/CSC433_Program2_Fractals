@@ -31,8 +31,8 @@ private:
 	bool hidden;		/*!< Whether or not view is shown on screen */
 
 public:
-	double x;			/*!< Bottom left x coordinant of the window */
-	double y;			/*!< Bottom left y coordinant of the window */
+	double x;			/*!< Bottom left x coordinate of the window */
+	double y;			/*!< Bottom left y coordinate of the window */
 	double width;		/*!< Width of the View Window */
 	double height;		/*!< Height of the View Window */
 
@@ -57,16 +57,17 @@ public:
 	 * @brief Prevents this object from being drawn.
 	 */
 	void hide();
+
+	/*!
+	 * @brief displays instructions on a tab
+	 *
+	 */
+	void instructions( string instruction );
 		
 	/*!
 	 * @brief Checks if this object is being drawn.
 	 */
 	bool isHidden();
-
-	/*!
-	 * @brief Function defining how the object is drawn.
-	 */
-	void draw();
 	
 	/*!
 	 * @brief Sends the view a click event.
@@ -86,12 +87,9 @@ public:
 	virtual void mousedrag(double x, double y) = 0;
 
 	/*!
-	 * @brief displays instructions on a tab
-	 *
+	 * @brief Function defining how the object is drawn.
 	 */
-	void instructions( string instruction );
-
-	
+	void draw();
 };
 
 #endif

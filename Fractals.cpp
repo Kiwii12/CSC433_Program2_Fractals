@@ -165,10 +165,6 @@ int Fractals::run( int argc, char *argv[] )
     // Register callbacks
     glutDisplayFunc( *::display );
     glutReshapeFunc( *::reshape );
-    glutKeyboardFunc( *::keyDown );
-	glutKeyboardUpFunc( *::keyUp );
-	glutSpecialFunc( *::keySpecialDown );
-	glutSpecialUpFunc( *::keySpecialUp );
     glutMouseFunc( *::mouseclick );
 	glutMotionFunc( *::mousedrag );
 	glutPassiveMotionFunc( *::mousemove );
@@ -275,74 +271,6 @@ void Fractals::reshape(int w, int h)
     // Switch back to (default) model view mode, for transformations
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Key down callback. Executes whenever a typical key is
- *		pressed.
- *
- * @param[in]	key - ASCII-encoded char of the key that was pressed.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void Fractals::keyDown(unsigned char key, int x, int y)
-{
-    // TODO
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Key up callback. Executes whenever a typical key is
- *		released.
- * 
- * @param[in]	key - ASCII-encoded char of the key that was pressed.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void Fractals::keyUp(unsigned char key, int x, int y)
-{
-	// TODO
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Special key down callback. Executes whenever a "special"
- *		key such as an arrow key is pressed.
- *  
- * @param[in]	key - Special GLUT enumerator of the key.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void Fractals::keySpecialDown(int key, int x, int y)
-{
-	// TODO
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Special key up callback. Executes whenever a "special" key
- *		such as an arrow key is released.
- *  
- * @param[in]	key - Special GLUT enumerator of the key.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void Fractals::keySpecialUp(int key, int x, int y)
-{
-	// TODO
 }
 
 /***************************************************************************//**
@@ -488,74 +416,6 @@ void display()
 void reshape(int w, int h)
 {
 	Fractals::getInstance()->reshape(w, h);
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Key down callback. Executes whenever a typical key is
- *		pressed.
- *
- * @param[in]	key - ASCII-encoded char of the key that was pressed.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void keyDown(unsigned char key, int x, int y)
-{
-	Fractals::getInstance()->keyDown(key, x, y);
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Key up callback. Executes whenever a typical key is
- *		released.
- * 
- * @param[in]	key - ASCII-encoded char of the key that was pressed.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void keyUp(unsigned char key, int x, int y)
-{
-	Fractals::getInstance()->keyUp(key, x, y);
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Special key down callback. Executes whenever a "special"
- *		key such as an arrow key is pressed.
- *  
- * @param[in]	key - Special GLUT enumerator of the key.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void keySpecialDown(int key, int x, int y)
-{
-	Fractals::getInstance()->keySpecialDown(key, x, y);
-}
-
-/***************************************************************************//**
- * @author Daniel Andrus, Johnny Ackerman
- * 
- * @par Description: Special key up callback. Executes whenever a "special" key
- * 		such as an arrow key is released.
- *  
- * @param[in]	key - Special GLUT enumerator of the key.
- * @param[in]	x - The x coordinate of the mouse at the time the key
- *				was pressed. Measured in integers.
- * @param[in]	y - The y coordinate of the mouse at the time the key
- *				was pressed.
-*******************************************************************************/
-void keySpecialUp(int key, int x, int y)
-{
-	Fractals::getInstance()->keySpecialUp(key, x, y);
 }
 
 /***************************************************************************//**

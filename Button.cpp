@@ -17,14 +17,14 @@
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * Constructor - initilizes data, and creates a window from information
+ * Constructor - initilizes variables
  * 
  * 
- * @param[in]	   string 1 - name of this button
- * @param[in]      double x - left coordinant of window
- * @param[in]      double y - bottom coordinant of window
- * @param[in]      double w - width of window
- * @param[in]      double h - height of window
+ * @param[in]	   1 - name of this button
+ * @param[in]      x - left coordinate of window
+ * @param[in]      y - bottom coordinate of window
+ * @param[in]      w - width of window
+ * @param[in]      h - height of window
  *****************************************************************************/
 Button::Button(string l, double x, double y, double w, double h)
 : label(l), x(x), y(y), width(w), height(h), hover(false), pressed(false)
@@ -36,7 +36,7 @@ Button::Button(string l, double x, double y, double w, double h)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * Destructor - exists
+ * Destructor - exists to resolve compile warnings.
  *****************************************************************************/
 Button::~Button()
 {
@@ -50,7 +50,7 @@ Button::~Button()
  * binds a function to the button
  * 
  * 
- * @param[in]      function<void()> action - function that button performs
+ * @param[in]      action - function that button performs when clicked
  *****************************************************************************/
 void Button::setAction(function<void()> action)
 {
@@ -61,14 +61,14 @@ void Button::setAction(function<void()> action)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * performs action when clicked on, only when clicked on
+ * performs action when clicked on
  *
  *
  *
- * @param[in]      int button - mouse button pressed
- * @param[in]      int state - mouse button pressed or released
- * @param[in]      double x - x coordinant of click
- * @param[in]      double y - y coordinant of click
+ * @param[in]      button - mouse button pressed
+ * @param[in]      state - mouse button pressed or released
+ * @param[in]      x - x coordinate of click
+ * @param[in]      y - y coordinate of click
  *****************************************************************************/
 void Button::mouseclick(int button, int state, double x, double y)
 {
@@ -120,8 +120,8 @@ void Button::mouseclick(int button, int state, double x, double y)
  *
  *
  *
- * @param[in]      double x - x coordinant of mouse
- * @param[in]      double y - y coordinant of mouse
+ * @param[in]      x - x coordinate of mouse
+ * @param[in]      y - y coordinate of mouse
  *****************************************************************************/
 void Button::mousemove(double x, double y)
 {
@@ -146,8 +146,8 @@ void Button::mousemove(double x, double y)
  *
  *
  *
- * @param[in]      double x - x coordinant of mouse
- * @param[in]      double y - y coordinant of mouse
+ * @param[in]      x - x coordinate of mouse
+ * @param[in]      y - y coordinate of mouse
  *****************************************************************************/
 void Button::mousedrag(double x, double y)
 {

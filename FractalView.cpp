@@ -19,25 +19,22 @@
  * Constructor - initilizes data, and creates a window from information
  * 
  * 
- * @param[in]      double x - left coordinant of window
- * @param[in]      double y - bottom coordinant of window
- * @param[in]      double w - width of window
- * @param[in]      double h - height of window
+ * @param[in]      x - left coordinate of window
+ * @param[in]      y - bottom coordinate of window
+ * @param[in]      w - width of window
+ * @param[in]      h - height of window
  *****************************************************************************/
 FractalView::FractalView(double x, double y, double w, double h)
-: View(x, y, w, h), build_button("Build Fractal", Fractals::button_x,
-Fractals::button_y, Fractals::button_w * 2, Fractals::button_h)
+: View(x, y, w, h), generated(false), generating(false), generror(0),
+build_button("Build Fractal", Fractals::button_x, Fractals::button_y,
+			 Fractals::button_w * 2, Fractals::button_h)
 {
+	// Initialize button with its action
 	build_button.setAction([](){
 		Fractals::getInstance()->fractalView->calculate();
 		glutPostRedisplay();
 	});
 	drawObject(&build_button);
-	
-	generated = false;
-	generating = false;
-	generror = 0;
-	close_button = NULL;
 }
 
 /**************************************************************************//**
@@ -66,9 +63,9 @@ void FractalView::calculate()
 	generror = 0;
 
 	// Get shortcut pointers to initiator and generator
-	list<Fractal::point>* initiator = 
+	list<Fractals::point>* initiator = 
 				&(Fractals::getInstance() -> initiatorView -> initiator);
-	list<Fractal::point>* generator =
+	list<Fractals::point>* generator =
 				&(Fractals::getInstance() -> generatorView -> generator);
 
 	// Make sure both have minimum number of points
@@ -112,7 +109,7 @@ void FractalView::calculate()
 	generator->back().angle += PI;
 
 	// Set up queue
-	deque<list<Fractal::point>::iterator> queue;
+	deque<list<Fractals::point>::iterator> queue;
 
 	// Copy fractal into queue
 	for (auto it = fractal.begin(); it != fractal.end(); it++)
@@ -121,7 +118,7 @@ void FractalView::calculate()
 	}
 	
 	// Time to build fractal, limit size to 0.5 GB
-	i = 500000000/sizeof(Fractal::point)/(generator->size() - 1);
+	i = 500000000/sizeof(Fractals::point)/(generator->size() - 1);
 	while (!queue.empty() && --i > 0)
 	{
 		auto it = queue.front();
@@ -135,6 +132,8 @@ void FractalView::calculate()
 			}
 		}
 	}
+	
+	// Do something special if we hit our memory limit
 	if (i <= 0)
 	{
 		generated = true;
@@ -143,7 +142,8 @@ void FractalView::calculate()
 		createCloseButton();
 		return;
 	}
-
+	
+	// Set variables to indicate success
 	generated = true;
 	generating = false;
 	generror = 0;
@@ -171,14 +171,12 @@ void FractalView::closeErrorMessage()
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * relays mouse clicks to the button class
+ * Process mouse click events
  *
- *
- *
- * @param[in]      int button - mouse button pressed
- * @param[in]      int state - mouse button pressed or released
- * @param[in]      double x - x coordinant of click
- * @param[in]      double y - y coordinant of click
+ * @param[in]      button - mouse button pressed
+ * @param[in]      state - mouse button pressed or released
+ * @param[in]      x - x coordinate of click
+ * @param[in]      y - y coordinate of click
  *****************************************************************************/
 void FractalView::mouseclick(int button, int state, double x, double y)
 {
@@ -193,12 +191,10 @@ void FractalView::mouseclick(int button, int state, double x, double y)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * passes mouse movement info to the build button(instance of button class
+ * Process mouse movement events.
  *
- *
- *
- * @param[in]      double x - x coordinant of mouse
- * @param[in]      double y - y coordinant of mouse
+ * @param[in]      x - x coordinate of mouse
+ * @param[in]      y - y coordinate of mouse
  *****************************************************************************/
 void FractalView::mousemove(double x, double y)
 {
@@ -213,12 +209,10 @@ void FractalView::mousemove(double x, double y)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * passes mouse movement info to the build button(instance of button class
+ * Process mouse dragging events
  *
- *
- *
- * @param[in]      double x - x coordinant of mouse
- * @param[in]      double y - y coordinant of mouse
+ * @param[in]      x - x coordinate of mouse
+ * @param[in]      y - y coordinate of mouse
  *****************************************************************************/
 void FractalView::mousedrag(double x, double y)
 {
@@ -233,17 +227,16 @@ void FractalView::mousedrag(double x, double y)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * Draws the background, the drawing grid, and the fractal. after it passes
- * drawing control back to view
+ * Draws the background, the drawing grid, and the fractal.
  *****************************************************************************/
 void FractalView::draw()
 {
 	const static double grid_spacing = 32.0;
 
 	//shortcut points - used for instuction check
-	list<Fractal::point>* initiator = 
+	list<Fractals::point>* initiator = 
 				&(Fractals::getInstance() -> initiatorView -> initiator);
-	list<Fractal::point>* generator =
+	list<Fractals::point>* generator =
 				&(Fractals::getInstance() -> generatorView -> generator);
 
 	// Draw background
@@ -263,6 +256,8 @@ void FractalView::draw()
 		glVertex2d(x, y + i - 0.5);
 		glVertex2d(x + width, y + i - 0.5);
 	}
+	
+	// Draw outline
 	glEnd();
 	glBegin(GL_LINE_LOOP);
 	{
@@ -285,7 +280,8 @@ void FractalView::draw()
 		glVertex2d(fractal.front().x, fractal.front().y);
 		glEnd();
 	}
-
+	
+	// Display an error message
 	if (generror != 0)
 	{
 		// Draw white background
@@ -305,7 +301,8 @@ void FractalView::draw()
 		glEnd();
 
 		glRasterPos2d(x + width/2 - 200, y + height/2 + 30);
-
+		
+		// Decide which message to display
 		switch (generror)
 		{
 		case 1:
@@ -349,13 +346,13 @@ void FractalView::draw()
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * binds a function to the button
+ * Calculates the distance and angle values for each line segment and stores
+ * them with the point data in the given list.
  * 
- * 
- * @param[in]      list<Fractal::points>* points - passes a list to
- * complete by calculating its theta value and distance to next point
+ * @param[in]      points - passes a list to complete by calculating the angle
+ * and distance to next point
  *****************************************************************************/
-void FractalView::completePoints(list<Fractal::point>* points)
+void FractalView::completePoints(list<Fractals::point>* points)
 {
 	// Loop through every point in list
 	auto it1 = points->begin();
@@ -386,18 +383,17 @@ void FractalView::completePoints(list<Fractal::point>* points)
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * passes mouse movement info to the build button(instance of button class
+ * Replaces a line segment in fractal with segments from generator. Relies on
+ * accurate angle and distance values.
  *
- *
- *
- * @param[in]      list<Fractal::point>::iterator it - initiator list
- * @param[in]      list<Fractal::point>::iterator fractalize - fractal list
- * @param[in]      list<Fractal::point>::iterator generator - generator list
+ * @param[in]      it - initiator to point to modify in fractal list
+ * @param[in]      fractalize - fractal list
+ * @param[in]      generator - generator list
  *****************************************************************************/
 void FractalView::fractalize(
-		list<Fractal::point>::iterator it,
-		list<Fractal::point> &fractal,
-		const list<Fractal::point> &generator)
+		list<Fractals::point>::iterator it,
+		list<Fractals::point> &fractal,
+		const list<Fractals::point> &generator)
 {
 	// Base case
 	if (it->distance <= 1)
@@ -410,7 +406,7 @@ void FractalView::fractalize(
 
 	// Replace line segment with generator
 	unsigned int i = 0;
-	for (Fractal::point p : generator)
+	for (Fractals::point p : generator)
 	{
 		// Set new distance and angle for old point
 		it->distance = ((p.distance * distance) / generator.back().distance);
@@ -441,7 +437,7 @@ void FractalView::fractalize(
  * @author Daniel Andrus, Johnny Ackerman
  * 
  * @par Description:
- * Draws Close button and gives it a closing function
+ * Creats error closing button button and gives it a closing function
  *****************************************************************************/
 void FractalView::createCloseButton()
 {

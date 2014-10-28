@@ -37,11 +37,6 @@
  * @par Compiling Instructions: 
  *      Build and Run
  * 
- * @par Build:
-   @verbatim
-   > g++ -std=c++11 -lGL -lglut -lGLU -o fractals
-   @endverbatim
- * 
  * @par Make:
    @vertbatim
    > make fractals
@@ -55,8 +50,9 @@
  * @section todo_bugs_modification_section Todo, Bugs, and Modifications
  *
  * @Bugs	-	Runs Slowly on weak computers for complex fractals
+ *				Linux OpenGL or GLUT has an uncommon GL_LINE_LOOP bug
  *
- * @todo	-	Add parallel programing so program never stops during
+ * @todo	-	Add parallel programing so program doesn't stops during
  *					Fractalization
  *
  * 
@@ -65,7 +61,15 @@
    Date          Modification 
    ----------   ---------------------------------------------------------------
    10-05-2014	Created GitHub repo
-   10-18-2014	Added program components and fractal functions
+   10-18-2014	Added program components and several classes
+   10-22-2014	Added different views
+   10-23-2014	Added mouse handling and rubberbanding
+   10-24-2014	Major visual overhaul
+   10-24-2014	Added fractal generation
+   10-25-2014	Made compatible with linux and fixed compile errors and warnings
+   10-26-2014	Added most documentation
+   10-27-2014	Added memory limit on fractal generation to prevent crashes
+   				Added error messages and user prompts and finalized project
    @endverbatim
  *
  ******************************************************************************/

@@ -30,7 +30,7 @@ using namespace std;
 class DrawingManager : public Drawable
 {
 protected:
-	map<int, list<Drawable*>> drawables;	/*!< list of objects to draw*/
+	map<int, list<Drawable*>> drawables;	/*!< map of objects to draw*/
 
 public:
 	/*!

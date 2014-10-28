@@ -55,44 +55,13 @@ void View::hide()
 }
 
 /**************************************************************************//**
- * @author Daniel Andrus
- * 
- * @par Description: Checks if the object is currently hidden or not.
- *
- * @returns true if the object is hidden, false if not.
- *****************************************************************************/
-bool View::isHidden()
-{
-	return hidden;
-}
-
-/**************************************************************************//**
- * @author Daniel Andrus
- * 
- * @par Description: Draws the object. If the object is hidden, does nothing.
- *****************************************************************************/
-void View::draw()
-{
-	// Do nothing if object is hidden
-	if (hidden)
-	{
-		return;
-	}
-	else
-	{
-		DrawingManager::draw();
-	}
-}
-
-
-/**************************************************************************//**
- * @author Johnny Ackerman, Daniel Andrus
+ * @author Johnathan Ackerman
  * 
  * @par Description:
  * gives instuction to the user
  * 
  * 
- * @param[in]      string - instruction - the instrunction to display
+ * @param[in]      instruction - the instrunction to display
  *****************************************************************************/
 void View::instructions( string instruction )
 {	
@@ -122,4 +91,34 @@ void View::instructions( string instruction )
 	double padding = (height - 18) / 2 + 2;
 	glRasterPos2d(x + padding, y + padding);
 	glutBitmapString( GLUT_BITMAP_HELVETICA_18, (const unsigned char *) instruction.c_str() );
+}
+
+/**************************************************************************//**
+ * @author Daniel Andrus
+ * 
+ * @par Description: Checks if the object is currently hidden or not.
+ *
+ * @returns true if the object is hidden, false if not.
+ *****************************************************************************/
+bool View::isHidden()
+{
+	return hidden;
+}
+
+/**************************************************************************//**
+ * @author Daniel Andrus
+ * 
+ * @par Description: Draws the object. If the object is hidden, does nothing.
+ *****************************************************************************/
+void View::draw()
+{
+	// Do nothing if object is hidden
+	if (hidden)
+	{
+		return;
+	}
+	else
+	{
+		DrawingManager::draw();
+	}
 }
