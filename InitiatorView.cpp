@@ -1,3 +1,13 @@
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
+ * @file File containing the implementatio for the View class.
+ *
+ * @brief Contains the implementation for the InitiatorView Subclass.
+*******************************************************************************/
+
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/

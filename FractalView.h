@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
  * @file File containing the declaration for the FractalView class.
  *
  * @brief Contains this subclass holds the Fractal drawing window of the view
@@ -36,7 +40,8 @@ private:
 	int generror;		/*!< throws an exception to help with error checking */
 	Button build_button;	/*!< instance of button class for the user to 
 							tell when to start building the fractal */
-	Button* close_button;
+
+	Button* close_button;	/*!< button to close error windows */
 
 	/**
 	* @brief Fills in the distance and theta values in a linked list
@@ -52,6 +57,9 @@ private:
 		list<Fractal::point> &fractal,
 		const list<Fractal::point> &generator);
 
+	/**
+	* @brief gives close button function to close errors
+	*/
 	void createCloseButton();
 
 public:
@@ -74,6 +82,9 @@ public:
 	*/
 	void calculate();
 
+	/**
+	* @brief function close button uses to close error windows
+	*/
 	void closeErrorMessage();
 
 	/**

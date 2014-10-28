@@ -1,4 +1,7 @@
-/***************************************************************************//*
+/***************************************************************************//**
+ * @author Johnny Ackerman
+ *
+ * @Date	10/18/2014
  * @file File containing the declaration for the Fractal class.
  *
  * @brief Contains the declaration for the Fractal class, the class that

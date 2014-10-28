@@ -1,3 +1,12 @@
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/24/2014
+ *
+ * @file File containing the implementatio for the TabButton class.
+ *
+ * @brief Contains the implementation for the TabButton Subclass.
+*******************************************************************************/
 #include "TabButton.h"
 
 /**************************************************************************//**

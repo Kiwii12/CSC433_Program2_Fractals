@@ -1,3 +1,13 @@
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/24/2014
+ *
+ * @file File containing the implementatio for the View class.
+ *
+ * @brief Contains the implementation for the Button class.
+*******************************************************************************/
+
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/

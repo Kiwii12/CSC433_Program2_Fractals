@@ -1,5 +1,8 @@
-
 /***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
  * @file File containing the declaration for the GeneratorView class.
  *
  * @brief Contains this subclass holds the generator drawing window of the view

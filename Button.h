@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/24/2014
+ *
  * @file File containing the declaration for the Button class.
  *
  * @brief This Class is responsible for creating and operating user interface

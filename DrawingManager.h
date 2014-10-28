@@ -1,4 +1,7 @@
 /***************************************************************************//**
+ * @author Daniel Andrus
+ *
+ * @Date	10/20/2014
  * @file File containing the declaration for the DrawingManager class.
  *
  * @brief Contains the declaration for the DrawingManager class.
@@ -30,6 +33,9 @@ protected:
 	map<int, list<Drawable*>> drawables;	/*!< list of objects to draw*/
 
 public:
+	/*!
+	 * @brief Destructor, exists
+	 */
 	virtual ~DrawingManager();
 
 	/*!

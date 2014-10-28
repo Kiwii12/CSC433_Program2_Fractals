@@ -1,3 +1,12 @@
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
+ * @file File containing the implementatio for the View class.
+ *
+ * @brief Contains the implementation for the FractalView Subclass.
+*******************************************************************************/
 /*******************************************************************************
  *                 DECLARATIONS, INCLUDES, AND NAMESPACES
 *******************************************************************************/
@@ -140,6 +149,12 @@ void FractalView::calculate()
 	generror = 0;
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Closes error message and removes close error button
+ *****************************************************************************/
 void FractalView::closeErrorMessage()
 {
 	if (close_button != NULL)
@@ -422,6 +437,12 @@ void FractalView::fractalize(
 	// END
 }
 
+/**************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ * 
+ * @par Description:
+ * Draws Close button and gives it a closing function
+ *****************************************************************************/
 void FractalView::createCloseButton()
 {
 	if (close_button == NULL)

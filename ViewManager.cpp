@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus
+ *
+ * @Date	10/20/2014
+ *
  * @file File containing the implementation for the ViewManager class.
  *
  * @brief Contains the implementation for the ViewManager class.

@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/24/2014
+ *
  * @file File containing the declaration for the TabButton class.
  *
  * @brief This Class is responsible for switching view tabs

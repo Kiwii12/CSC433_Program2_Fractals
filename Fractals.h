@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
  * @file File containing the declaration for the Fractals class.
  *
  * @brief Contains the declaration for the Fractals class, the core class of the

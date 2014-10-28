@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus
+ *
+ * @Date	10/20/2014
+ *
  * @file File containing the declaration for the ViewManager class.
  *
  * @brief Contains the declaration for the ViewManager class.

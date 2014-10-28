@@ -1,4 +1,7 @@
 /***************************************************************************//**
+ * @author Daniel Andrus
+ *
+ * @Date	9/30/2014
  * @file File containing the declaration for the Drawable class.
  *
  * @brief Contains the declaration for the Drawable class.

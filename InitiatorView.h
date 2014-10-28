@@ -1,4 +1,8 @@
 /***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
  * @file File containing the declaration for the InitiatorView class.
  *
  * @brief Contains this subclass holds the initaitor drawing window of the view
@@ -17,7 +21,15 @@ class InitiatorView;
 #include "Fractals.h"
 #include "View.h"
 #include "Button.h"
-
+/***************************************************************************//**
+ * @author Daniel Andrus, Johnny Ackerman
+ *
+ * @Date	10/20/2014
+ *
+ * @file File containing the implementatio for the View class.
+ *
+ * @brief Contains the implementation for the View class.
+*******************************************************************************/
 /***************************************************************************//**
  * @brief The InitiatorView class is a subclass of view, it deals with
  *		drawing the initiator
